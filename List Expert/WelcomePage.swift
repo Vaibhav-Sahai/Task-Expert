@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             ZStack{
-                VStack(alignment: .center ,spacing: 75){ //Holds All Text + Button
+                VStack(spacing: 10){ //Holds All Text
                     //Managing Hello Text
                     if username != ""{
                         Text("Hello, "+username+"!")
@@ -23,18 +23,19 @@ struct ContentView: View {
                             .multilineTextAlignment(.center)
                             .allowsTightening(true)
                             .minimumScaleFactor(0.25)
-                            .padding()
                     }else{
                         Text("Hello!")
                             .font(.system(size: 64, weight: .bold, design: .default))
                             .multilineTextAlignment(.center)
                             .allowsTightening(true)
                             .minimumScaleFactor(0.25)
-                            .padding()
                     }
                     
                     WelcomeTextView(tasks: 10) //Does the Welcome Text
-                    
+                }
+
+                VStack(spacing: 10){
+                    Spacer()
                     NavigationLink(
                         destination: ToDoPage(),
                         label: {
@@ -44,6 +45,16 @@ struct ContentView: View {
                                 .background(Color.purple)
                                 .cornerRadius(10)
                         })
+                    Button{
+                        alertView()
+                    } label: {
+                        Text("Enter Your Name")
+                            .frame(width: 280, height: 50)
+                            .foregroundColor(.white)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                            .padding(.bottom, 80)
+                    }
                 }
             }
             .navigationBarHidden(true)

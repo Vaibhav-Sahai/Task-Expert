@@ -9,16 +9,32 @@ import SwiftUI
 
 //MARK:- Intro Text
 struct ContentView: View {
+    @State private var alertIsPresented = true
+    @State var username = ""
     var body: some View {
         ZStack{
             VStack(alignment: .center ,spacing: 75){ //Holds All Text + Button
-                Text("Hello!")
-                    .font(.system(size: 64, weight: .bold, design: .default))
-                    .allowsTightening(true)
+                //Managing Hello Text
+                if username != ""{
+                    Text("Hello, "+username+"!")
+                        .font(.system(size: 64, weight: .bold, design: .default))
+                        .multilineTextAlignment(.center)
+                        .allowsTightening(true)
+                        .minimumScaleFactor(0.5)
+                        .padding()
+                }else{
+                    Text("Hello!")
+                        .font(.system(size: 64, weight: .bold, design: .default))
+                        .multilineTextAlignment(.center)
+                        .allowsTightening(true)
+                        .minimumScaleFactor(0.25)
+                        .padding()
+                }
                 
                 WelcomeTextView(tasks: 10) //Does the Welcome Text
                 
                 Button{
+                    alertView()
                     print("Clicked")
                 } label: {
                     Text("Continue")
@@ -29,6 +45,22 @@ struct ContentView: View {
                 }
             }
         }
+    }
+    //Mark:- Alert View
+    func alertView(){
+        let alert = UIAlertController(title: "Hello, New User!", message: "Enter Your Name", preferredStyle: .alert)
+        alert.addTextField { (pass) in
+            pass.placeholder = "Name"
+            
+        }
+        let confirmName = UIAlertAction(title: "Confirm", style: .default) { (_) in
+            username = alert.textFields![0].text!
+        }
+        alert.addAction(confirmName)
+        //Presenting the Alert
+        UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: {
+            
+        })
     }
 }
 

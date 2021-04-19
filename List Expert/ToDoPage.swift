@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ToDoPage: View {
+    @State var dateAndTime = "" //Init Identifier
     var body: some View {
         ZStack{
             //MARK: - Putting Banner on Top
@@ -20,14 +21,14 @@ struct ToDoPage: View {
             }
             //MARK:- Date Time And List Button
             VStack{
-                HStack(spacing: 50){
-                    Text("31st September, 2021")
+                HStack(spacing: 70){
+                    Text(dateAndTime)
                         .font(.system(size: 24, weight: .semibold, design: .default))
                         .minimumScaleFactor(0.25)
                         .lineLimit(1)
                         .allowsTightening(true)
                         .padding()
-                    
+                
                     Button(action: {
                         //Add List Stuff Here
                     }) {
@@ -41,9 +42,18 @@ struct ToDoPage: View {
                 }
                 Spacer()
             }
+        }.onAppear{ //Running Date Call
+            self.dateFormatterTool()
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
+    }
+    //MARK:- Date Management
+    func dateFormatterTool(){
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM, hh:mm a"
+        dateAndTime = dateFormatter.string(from: currentDate)
     }
 }
 

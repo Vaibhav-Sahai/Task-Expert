@@ -20,19 +20,22 @@ struct ContentView: View {
                     if username != ""{
                         Text("Hello, "+username+"!")
                             .font(.system(size: 64, weight: .bold, design: .default))
+                            .minimumScaleFactor(0.25)
+                            .lineLimit(1)
                             .multilineTextAlignment(.center)
                             .allowsTightening(true)
-                            .minimumScaleFactor(0.25)
+                            .padding()
                     }else{
                         Text("Hello!")
                             .font(.system(size: 64, weight: .bold, design: .default))
-                            .multilineTextAlignment(.center)
-                            .allowsTightening(true)
                             .minimumScaleFactor(0.25)
+                            .lineLimit(1)
+                            .allowsTightening(true)
+                            .padding()
                     }
                     
                     WelcomeTextView(tasks: 10) //Does the Welcome Text
-                }
+                }.padding(.bottom, 40)
 
                 VStack(spacing: 10){
                     Spacer()
@@ -42,17 +45,19 @@ struct ContentView: View {
                             Text("Continue")
                                 .frame(width: 280, height: 50)
                                 .foregroundColor(.white)
-                                .background(Color.purple)
+                                .background(Color("Magenta"))
                                 .cornerRadius(10)
+                                .shadow(color: Color("Magenta"), radius: 4)
                         })
                     Button{
                         alertView()
                     } label: {
-                        Text("Enter Your Name")
+                        Text("Introduce Yourself")
                             .frame(width: 280, height: 50)
                             .foregroundColor(.white)
                             .background(Color.blue)
                             .cornerRadius(10)
+                            .shadow(color: .blue, radius: 4)
                             .padding(.bottom, 80)
                     }
                 }
@@ -91,12 +96,9 @@ struct WelcomeTextView: View{
     var tasks: Int
     var body: some View{
         HStack(spacing: 5){
-            Text("You've")
+            Text("You've \(tasks) Tasks Pending!")
                 .font(.system(size: 24, weight: .regular, design: .default))
-            Text("\(tasks)")
-                .font(.system(size: 24, weight: .regular, design: .default))
-            Text("Tasks Pending!")
-                .font(.system(size: 24, weight: .regular, design: .default))
+                .padding()
         }
     }
 }

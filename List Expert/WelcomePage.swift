@@ -16,6 +16,7 @@ struct ContentView: View {
         NavigationView{
             ZStack{
                 VStack(spacing: 10){ //Holds All Text
+                    Spacer()
                     //Managing Hello Text
                     if username != ""{
                         Text("Hello, "+username+"!")
@@ -35,32 +36,33 @@ struct ContentView: View {
                     }
                     
                     WelcomeTextView(tasks: 10) //Does the Welcome Text
-                }.padding(.bottom, 40)
-
-                VStack(spacing: 10){
                     Spacer()
-                    NavigationLink(
-                        destination: ToDoPage(),
-                        label: {
-                            Text("Continue")
+                    //Buttons:
+                    VStack(spacing: 10){
+                        NavigationLink(
+                            destination: ToDoPage(),
+                            label: {
+                                Text("Continue")
+                                    .frame(width: 280, height: 50)
+                                    .foregroundColor(.white)
+                                    .background(Color("Magenta"))
+                                    .cornerRadius(10)
+                                    .shadow(color: Color("Magenta"), radius: 4)
+                            })
+                        Button{
+                            alertView()
+                        } label: {
+                            Text("Introduce Yourself")
                                 .frame(width: 280, height: 50)
                                 .foregroundColor(.white)
-                                .background(Color("Magenta"))
+                                .background(Color.blue)
                                 .cornerRadius(10)
-                                .shadow(color: Color("Magenta"), radius: 4)
-                        })
-                    Button{
-                        alertView()
-                    } label: {
-                        Text("Introduce Yourself")
-                            .frame(width: 280, height: 50)
-                            .foregroundColor(.white)
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                            .shadow(color: .blue, radius: 4)
-                            .padding(.bottom, 80)
+                                .shadow(color: .blue, radius: 4)
+                                .padding(.bottom, 80)
+                        }
                     }
                 }
+
             }
             .navigationBarHidden(true)
         }

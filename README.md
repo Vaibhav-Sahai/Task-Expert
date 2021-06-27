@@ -1,2 +1,2 @@
 # List-Expert
-Brand New Minimalist List App!
+Brand New Minimalist List App! (Coming Soon!)

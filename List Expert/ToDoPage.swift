@@ -29,18 +29,17 @@ struct ToDoPage: View {
                         .lineLimit(1)
                         .allowsTightening(true)
                         .padding()
-                
-                    Button(action: {
-                        //Toggle Modal Popup View
-                        
-                    }) {
-                        Image(systemName: "text.insert")
-                            .renderingMode(.original)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 30, height: 30)
-                            .padding()
-                    }
+                    
+                    NavigationLink(
+                        destination: AddTask(),
+                        label: {
+                            Image(systemName: "text.insert")
+                                .renderingMode(.original)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                                .padding()
+                        })
                 }
                 
                 Spacer()

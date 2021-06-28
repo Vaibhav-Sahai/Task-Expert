@@ -105,7 +105,7 @@ struct TaskView: View {
                             .allowsTightening(true)
                         
                         Text("Remainging Tasks: " + task.remaining)
-                            .font(.system(size: 11, weight: .light, design: .default))
+                            .font(.system(size: 13, weight: .light, design: .default))
                             .foregroundColor(.black)
                     }
                 }

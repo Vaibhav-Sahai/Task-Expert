@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Aesthetic-iOS-Wallpaper.jpg",
+      "filename" : "Banner.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Aesthetic-iOS-Wallpaper-1.jpg",
+      "filename" : "Banner-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Aesthetic-iOS-Wallpaper-2.jpg",
+      "filename" : "Banner-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

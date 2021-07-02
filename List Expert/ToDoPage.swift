@@ -97,7 +97,7 @@ struct TaskView: View {
     
     var body: some View{
         NavigationLink(
-            destination: TaskAdd(),
+            destination: TaskAdd(taskType: task.taskType),
             label: {
                 VStack{
                     Image(systemName: task.image)

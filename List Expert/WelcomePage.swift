@@ -82,6 +82,8 @@ struct ContentView: View {
             }
             .navigationBarHidden(true)
         }
+        //Color of Back Button
+        .accentColor(.black)
     }
 
     //Mark:- Alert View

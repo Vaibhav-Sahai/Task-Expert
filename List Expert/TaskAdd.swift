@@ -8,13 +8,35 @@
 import SwiftUI
 
 struct TaskAdd: View {
+    var taskType: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        //MARK:- Header 
+        ZStack {
+            VStack{
+                Image("Banner")
+                    .resizable()
+                    .ignoresSafeArea()
+                    .frame(width: 500 ,height: 100)
+                Spacer()
+            }
+            VStack {
+                Text(taskType)
+                    .font(.largeTitle).bold()
+                    .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+                    .minimumScaleFactor(0.25)
+                    .lineLimit(1)
+                    .allowsTightening(true)
+                Spacer()
+            }
+        }
+        //Offset Navigation Bar Size
+        .offset(x:0 , y: -60)
     }
 }
 
 struct TaskAdd_Previews: PreviewProvider {
     static var previews: some View {
-        TaskAdd()
+        TaskAdd(taskType: "")
     }
 }

@@ -49,7 +49,7 @@ struct ToDoPage: View {
                     .minimumScaleFactor(0.25)
                     .lineLimit(1)
                     .allowsTightening(true)
-                  
+                    .animation(Animation.easeIn.delay(0.1))
                 
                 Text(dateAndTime)
                     .font(.title3)
@@ -57,6 +57,7 @@ struct ToDoPage: View {
                     .minimumScaleFactor(0.25)
                     .lineLimit(1)
                     .allowsTightening(true)
+                    .animation(Animation.easeIn.delay(0.2))
                 
                 Spacer()
                 //MARK:- Calling TaskView
@@ -66,8 +67,11 @@ struct ToDoPage: View {
                             ForEach(Tasks, id: \.self){ Task in
                                 TaskView(task: Task)
                             }
-                        }.padding()
-                    }.padding()
+                        }
+                        .padding()
+                    }
+                    .padding()
+                    .animation(Animation.spring().delay(0.3))
                 }
             }
 

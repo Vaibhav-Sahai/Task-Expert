@@ -112,6 +112,7 @@ struct TaskView: View {
                 .frame(width: 180, height: 180)
                 .background(task.colorCell)
                 .cornerRadius(50)
+                .shadow(color: .gray, radius: 10)
             })
         
     }

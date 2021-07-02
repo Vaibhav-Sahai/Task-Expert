@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var alertIsPresented = true
     @State var username = ""
+    @State var show = false
     
     var body: some View {
         NavigationView{
@@ -26,6 +27,8 @@ struct ContentView: View {
                             .multilineTextAlignment(.center)
                             .allowsTightening(true)
                             .padding()
+                            .animation(Animation.easeIn.delay(0.1))
+                        
                     }else{
                         Text("Hello!")
                             .font(.system(size: 64, weight: .bold, design: .default))
@@ -33,6 +36,7 @@ struct ContentView: View {
                             .lineLimit(1)
                             .allowsTightening(true)
                             .padding()
+                            .animation(Animation.easeIn.delay(0.1))
                     }
                     
                     WelcomeTextView(tasks: 10) //Does the Welcome Text
@@ -40,7 +44,8 @@ struct ContentView: View {
                     //Buttons:
                     VStack(spacing: 10){
                         NavigationLink(
-                            destination: ToDoPage(),
+                            destination: ToDoPage()
+                                .animation(.spring()),
                             label: {
                                 Text("Continue")
                                     .frame(width: 280, height: 50)
@@ -48,6 +53,11 @@ struct ContentView: View {
                                     .background(Color("Magenta"))
                                     .cornerRadius(10)
                                     .shadow(color: Color("Magenta"), radius: 4)
+                                    .animation(Animation.spring().delay(0.3), value: show)
+                                    .onAppear{
+                                        self.show = true
+                                    }
+                                    
                             })
                         Button{
                             alertView()
@@ -59,14 +69,21 @@ struct ContentView: View {
                                 .cornerRadius(10)
                                 .shadow(color: .blue, radius: 4)
                                 .padding(.bottom, 80)
+                                .animation(Animation.spring().delay(0.4), value: show)
+                                .onAppear{
+                                    self.show = true
+                                }
+                                
                         }
                     }
+                    
                 }
 
             }
             .navigationBarHidden(true)
         }
     }
+
     //Mark:- Alert View
     func alertView(){
         let alert = UIAlertController(title: "Hello, New User!", message: "Enter Your Name", preferredStyle: .alert)
@@ -101,6 +118,7 @@ struct WelcomeTextView: View{
             Text("You've \(tasks) Tasks Pending!")
                 .font(.system(size: 24, weight: .regular, design: .default))
                 .padding()
+                .animation(Animation.easeIn.delay(0.2))
         }
     }
 }

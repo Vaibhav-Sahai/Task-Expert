@@ -10,7 +10,7 @@ import SwiftUI
 //MARK:- Cells For Task Managers
 struct Task: Hashable{
     var id: Int
-    let title, image, remaining: String
+    let title, image, remaining, taskType: String
     let colorIcon, colorCell: Color
     
 }
@@ -18,16 +18,16 @@ struct Task: Hashable{
 struct ToDoPage: View {
 
     var columns: [GridItem] =
-        Array(repeating: .init(.flexible(maximum: 160), spacing: 35, alignment: .center), count: 2)
+        Array(repeating: .init(.flexible(maximum: 160), spacing: 30, alignment: .center), count: 2)
 
     @State var dateAndTime = "" //Init Identifier
     
     //MARK:- Assigning Data to Cells
     let Tasks: [Task] = [
-        Task(id: 0, title: "Urgent Tasks", image: "exclamationmark", remaining: "0", colorIcon: Color("LightRed"), colorCell: .red),
-        Task(id: 1, title: "Work Tasks", image: "bag.fill", remaining: "0", colorIcon: Color("LightBlue"), colorCell: .blue),
-        Task(id: 2, title: "Shopping Tasks", image: "cart", remaining: "0", colorIcon: Color("LightGreen"), colorCell: .green),
-        Task(id: 3, title: "Miscellaneous Tasks", image: "pencil", remaining: "0", colorIcon: Color("LightGray"), colorCell: .gray)
+        Task(id: 0, title: "Urgent", image: "exclamationmark", remaining: "0", taskType: "Urgent", colorIcon: Color("LightRed"), colorCell: .red),
+        Task(id: 1, title: "Work", image: "bag.fill", remaining: "0", taskType: "Work", colorIcon: Color("LightBlue"), colorCell: .blue),
+        Task(id: 2, title: "Groceries", image: "cart", remaining: "0", taskType: "Groceries", colorIcon: Color("LightGreen"), colorCell: .green),
+        Task(id: 3, title: "Miscellaneous", image: "pencil", remaining: "0", taskType: "Miscellaneous", colorIcon: Color("LightGray"), colorCell: .gray)
     ]
     
     var body: some View {
@@ -41,15 +41,23 @@ struct ToDoPage: View {
                 Spacer()
             }
             //MARK:- Date Time
-            VStack(spacing: 10){
-                HStack(spacing: 70){
-                    Text(dateAndTime)
-                        .font(.system(size: 24, weight: .semibold, design: .default))
-                        .minimumScaleFactor(0.25)
-                        .lineLimit(1)
-                        .allowsTightening(true)
-                        .padding()
-                }
+            VStack(spacing: 0){
+                Spacer()
+                Text("Home")
+                    .font(.largeTitle).bold()
+                    .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+                    .minimumScaleFactor(0.25)
+                    .lineLimit(1)
+                    .allowsTightening(true)
+                  
+                
+                Text(dateAndTime)
+                    .font(.title3)
+                    .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                    .minimumScaleFactor(0.25)
+                    .lineLimit(1)
+                    .allowsTightening(true)
+                
                 Spacer()
                 //MARK:- Calling TaskView
                 VStack {
@@ -67,6 +75,7 @@ struct ToDoPage: View {
             //Running Date Call
             self.dateFormatterTool()
         }
+        .navigationTitle("Home")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
     }
@@ -84,7 +93,7 @@ struct TaskView: View {
     
     var body: some View{
         NavigationLink(
-            destination: UrgentTaskAdd(),
+            destination: TaskAdd(),
             label: {
                 VStack{
                     Image(systemName: task.image)
@@ -98,14 +107,14 @@ struct TaskView: View {
                     
                     VStack(spacing: 10) {
                         Text(task.title)
-                            .font(.system(size: 15, weight: .semibold, design: .default))
+                            .font(.title2)
                             .foregroundColor(.white)
                             .minimumScaleFactor(0.25)
                             .lineLimit(1)
                             .allowsTightening(true)
                         
                         Text("Remainging Tasks: " + task.remaining)
-                            .font(.system(size: 13, weight: .light, design: .default))
+                            .font(.caption)
                             .foregroundColor(.black)
                     }
                 }
@@ -128,8 +137,10 @@ struct TaskView_Previews: PreviewProvider{
 
 struct ToDoPage_Previews: PreviewProvider {
     static var previews: some View {
-        ToDoPage()
-            .previewDevice("iPhone 12 Pro Max")
+        Group {
+            ToDoPage()
+                .previewDevice("iPhone 12 Pro Max")
+        }
         
     }
 }

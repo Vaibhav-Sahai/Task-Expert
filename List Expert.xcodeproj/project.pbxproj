@@ -11,7 +11,7 @@
 		8062153D262C449200F68138 /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062153C262C449200F68138 /* WelcomePage.swift */; };
 		8062153F262C449300F68138 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8062153E262C449300F68138 /* Assets.xcassets */; };
 		80621542262C449300F68138 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80621541262C449300F68138 /* Preview Assets.xcassets */; };
-		807E8B18268A0C7D003DC009 /* UrgentTaskAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807E8B17268A0C7D003DC009 /* UrgentTaskAdd.swift */; };
+		807E8B18268A0C7D003DC009 /* TaskAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807E8B17268A0C7D003DC009 /* TaskAdd.swift */; };
 		8094AE0B262C6B68000DA689 /* ToDoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094AE0A262C6B68000DA689 /* ToDoPage.swift */; };
 /* End PBXBuildFile section */
 
@@ -22,7 +22,7 @@
 		8062153E262C449300F68138 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80621541262C449300F68138 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		80621543262C449300F68138 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		807E8B17268A0C7D003DC009 /* UrgentTaskAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrgentTaskAdd.swift; sourceTree = "<group>"; };
+		807E8B17268A0C7D003DC009 /* TaskAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAdd.swift; sourceTree = "<group>"; };
 		8094AE0A262C6B68000DA689 /* ToDoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,7 +59,7 @@
 				8062153A262C449200F68138 /* List_ExpertApp.swift */,
 				8062153C262C449200F68138 /* WelcomePage.swift */,
 				8094AE0A262C6B68000DA689 /* ToDoPage.swift */,
-				807E8B17268A0C7D003DC009 /* UrgentTaskAdd.swift */,
+				807E8B17268A0C7D003DC009 /* TaskAdd.swift */,
 				8062153E262C449300F68138 /* Assets.xcassets */,
 				80621543262C449300F68138 /* Info.plist */,
 				80621540262C449300F68138 /* Preview Content */,
@@ -147,7 +147,7 @@
 				8062153D262C449200F68138 /* WelcomePage.swift in Sources */,
 				8094AE0B262C6B68000DA689 /* ToDoPage.swift in Sources */,
 				8062153B262C449200F68138 /* List_ExpertApp.swift in Sources */,
-				807E8B18268A0C7D003DC009 /* UrgentTaskAdd.swift in Sources */,
+				807E8B18268A0C7D003DC009 /* TaskAdd.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

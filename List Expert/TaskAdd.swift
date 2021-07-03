@@ -20,6 +20,7 @@ struct TaskAdd: View {
                     .frame(width: 500 ,height: 100)
                 Spacer()
             }
+            //MARK:- Task Type and Tasks Remainging
             VStack {
                 Text(taskType)
                     .font(.largeTitle).bold()
@@ -27,6 +28,14 @@ struct TaskAdd: View {
                     .minimumScaleFactor(0.25)
                     .lineLimit(1)
                     .allowsTightening(true)
+                    
+                Text("10 Tasks")
+                    .font(.title3)
+                    .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                    .minimumScaleFactor(0.25)
+                    .lineLimit(1)
+                    .allowsTightening(true)
+                    
                 Spacer()
             }
         }

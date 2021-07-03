@@ -67,11 +67,12 @@ struct ToDoPage: View {
                             ForEach(Tasks, id: \.self){ Task in
                                 TaskView(task: Task)
                             }
+                            .animation(Animation.easeIn.delay(0.3))
                         }
                         .padding()
                     }
                     .padding()
-                    .animation(Animation.spring().delay(0.3))
+                    
                 }
             }
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct individualTask: Hashable {
     var id: Int
-    let title: String
+    let title, color: String
     
 }
 
@@ -19,19 +19,19 @@ struct TaskAdd: View {
     
     //MARK:- Diffferent Arrays
     let individualTasksUrgent:[individualTask] = [
-        individualTask(id: 1, title: "Kidnap the kids")
+        individualTask(id: 1, title: "Kidnap the kids", color: "Red")
     ]
     
     let individualTasksWork:[individualTask] = [
-        individualTask(id: 1, title: "Kidnap the kids at work")
+        individualTask(id: 1, title: "Kidnap the kids at work", color: "Blue")
     ]
     
     let individualTasksGroceries:[individualTask] = [
-        individualTask(id: 1, title: "Kidnap the kids at groceries")
+        individualTask(id: 1, title: "Kidnap the kids at groceries", color: "Green")
     ]
     
     let individualTasksMiscellaneous:[individualTask] = [
-        individualTask(id: 1, title: "Kidnap the kids at miscellaneous")
+        individualTask(id: 1, title: "Kidnap the kids at miscellaneous", color: "Grey")
     ]
     //Passed Items
     var taskType: String
@@ -105,54 +105,58 @@ struct individualTaskView: View {
     let task: individualTask
     var body: some View {
         VStack {
-            HStack {
-                Button{
-                    //Action: Task complete
-                } label: {
-                    Image(systemName: "hand.thumbsup.fill")
-                        .resizable()
-                        .foregroundColor(Color(#colorLiteral(red: 0.2897821802, green: 0.7647058964, blue: 0, alpha: 1)))
-                        .frame(width: 30, height: 30)
-                        .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 0))
-                }
-                Spacer()
-                Button{
-                    //Action: Task discard
-                } label: {
-                    Image(systemName: "hand.thumbsdown.fill")
-                        .resizable()
-                        .foregroundColor(Color(#colorLiteral(red: 1, green: 0.08644310853, blue: 0.02825784669, alpha: 1)))
-                        .frame(width: 30, height: 30)
-                        .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 10))
-                }
-            }
+            Spacer()
+            
             Text(task.title)
                 .font(.title3)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
                 .minimumScaleFactor(0.25)
-                .lineLimit(3)
+                .lineLimit(6)
                 .allowsTightening(true)
                 .padding()
+            HStack {
+                Spacer()
+                Button{
+                    //Action: Task complete
+                } label: {
+                    Image(systemName: "checkmark.circle.fill")
+                        .resizable()
+                        .foregroundColor(Color(#colorLiteral(red: 0.2897821802, green: 0.7647058964, blue: 0, alpha: 1)))
+                        .frame(width: 30, height: 30)
+                }
+                Spacer()
+                Button{
+                    //Action: Task discard
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .foregroundColor(Color(#colorLiteral(red: 1, green: 0.08644310853, blue: 0.02825784669, alpha: 1)))
+                        .frame(width: 30, height: 30)
+                }
+                Spacer()
+            }
+            Spacer()
         }
-        .frame(width: 180, height: 200, alignment: .center)
+        .frame(width: 180, height: 250, alignment: .center)
         .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)), Color(#colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1))]), startPoint: .top, endPoint: .bottom))
         .cornerRadius(50)
         .shadow(color: .gray, radius: 10)
     }
 }
 
-/*
+
 //MARK:- Preview Cell View
 struct individualTaskView_Previews: PreviewProvider{
     static var previews: some View{
-        individualTaskView(task: individualTask.init(id: 1, title: "Very lonnggg text testy testy very testy very very testy"))
+        individualTaskView(task: individualTask.init(id: 1, title: "Pick up tomatos lettuce cream and soda", color: "Red"))
     }
 }
-*/
 
+/*
 struct TaskAdd_Previews: PreviewProvider {
     static var previews: some View {
         TaskAdd(taskType: "", tasksLeft: "")
     }
 }
+*/

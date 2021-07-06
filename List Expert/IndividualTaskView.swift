@@ -14,7 +14,7 @@ struct individualTask: Hashable {
     
 }
 
-struct TaskAdd: View {
+struct IndividualTaskView: View {
     var columns: [GridItem] =
         Array(repeating: .init(.flexible(maximum: 160), spacing: 30, alignment: .center), count: 2)
     
@@ -50,12 +50,14 @@ struct TaskAdd: View {
             }
             //MARK:- Task Type and Tasks Remainging
             VStack {
-                Text(taskType)
-                    .font(.largeTitle).bold()
-                    .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                    .minimumScaleFactor(0.25)
-                    .lineLimit(1)
-                    .allowsTightening(true)
+                HStack {
+                    Text(taskType)
+                        .font(.largeTitle).bold()
+                        .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+                        .minimumScaleFactor(0.25)
+                        .lineLimit(1)
+                        .allowsTightening(true)
+                }
                     
                 Text("\(tasksLeft) Tasks")
                     .font(.title3)
@@ -63,8 +65,10 @@ struct TaskAdd: View {
                     .minimumScaleFactor(0.25)
                     .lineLimit(1)
                     .allowsTightening(true)
-                    
+                
                 Spacer()
+                
+                //MARK:- LazyVGrid Here
                 VStack{
                     //Creating the scrollview
                     ScrollView{
@@ -91,8 +95,25 @@ struct TaskAdd: View {
                                 }
                             }
                         }
+                        .padding()
                     }.offset(x: 0, y: 40)
                 }
+                
+                Spacer()
+                HStack {
+                    Spacer()
+                    NavigationLink(
+                        destination: TaskAddScreen(taskType: taskType),
+                        label: {
+                            Image(systemName: "text.badge.plus")
+                                .resizable()
+                                .renderingMode(.original)
+                                .foregroundColor(.black)
+                                .frame(width: 40, height: 40)
+                                .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 55))
+                    })
+                }.padding()
+
             }
         }
         //Offset Navigation Bar Size
@@ -139,25 +160,25 @@ struct individualTaskView: View {
             }
             Spacer()
         }
-        .frame(width: 180, height: 250, alignment: .center)
+        .frame(width: 180, height: 240, alignment: .center)
         .background(LinearGradient(gradient: Gradient(colors: [Color(task.color1), Color(task.color2)]), startPoint: .top, endPoint: .bottom))
         .cornerRadius(50)
         .shadow(color: .gray, radius: 10)
     }
 }
 
-
+/*
 //MARK:- Preview Cell View
 struct individualTaskView_Previews: PreviewProvider{
     static var previews: some View{
         individualTaskView(task: individualTask.init(id: 1, title: "Pick up tomatos lettuce cream and soda", color1: "TaskBlue1", color2: "TaskBlue2"))
     }
 }
+*/
 
-/*
-struct TaskAdd_Previews: PreviewProvider {
+struct IndividualTaskView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskAdd(taskType: "", tasksLeft: "")
+        IndividualTaskView(taskType: "", tasksLeft: "")
+            .previewDevice("iPhone 12 Pro Max")
     }
 }
-*/

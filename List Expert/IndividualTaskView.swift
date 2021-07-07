@@ -76,22 +76,22 @@ struct IndividualTaskView: View {
                             //Checking what task type
                             if taskType.lowercased() == "urgent"{
                                 ForEach(individualTasksUrgent, id: \.self){
-                                    Task in individualTaskView(task: Task)
+                                    Task in TaskCellView(task: Task)
                                 }
                             }
                             if taskType.lowercased() == "work"{
                                 ForEach(individualTasksWork, id: \.self){
-                                    Task in individualTaskView(task: Task)
+                                    Task in TaskCellView(task: Task)
                                 }
                             }
                             if taskType.lowercased() == "groceries"{
                                 ForEach(individualTasksGroceries, id: \.self){
-                                    Task in individualTaskView(task: Task)
+                                    Task in TaskCellView(task: Task)
                                 }
                             }
                             if taskType.lowercased() == "miscellaneous"{
                                 ForEach(individualTasksMiscellaneous, id: \.self){
-                                    Task in individualTaskView(task: Task)
+                                    Task in TaskCellView(task: Task)
                                 }
                             }
                         }
@@ -123,7 +123,7 @@ struct IndividualTaskView: View {
 
 //MARK:- Individual Task Cell View
 
-struct individualTaskView: View {
+struct TaskCellView: View {
     let task: individualTask
     var body: some View {
         VStack {
@@ -169,7 +169,7 @@ struct individualTaskView: View {
 
 /*
 //MARK:- Preview Cell View
-struct individualTaskView_Previews: PreviewProvider{
+struct TaskCellView_Previews: PreviewProvider{
     static var previews: some View{
         individualTaskView(task: individualTask.init(id: 1, title: "Pick up tomatos lettuce cream and soda", color1: "TaskBlue1", color2: "TaskBlue2"))
     }

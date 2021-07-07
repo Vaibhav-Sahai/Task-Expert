@@ -33,7 +33,7 @@ struct TaskAddScreen: View {
             //MARK:- Add Task
             VStack(spacing: 10) {
                 NavigationLink(
-                    destination: individualTaskView(task: individualTask.init(id: 2, title: "", color1: "", color2: "")),
+                    destination: IndividualTaskView(taskType: taskType, tasksLeft: ""),
                     label: {
                         Text("Add Task")
                             .frame(width: 280, height: 50)
@@ -44,7 +44,7 @@ struct TaskAddScreen: View {
                 })
             //MARK:- Don't Add Task
                 NavigationLink(
-                    destination: individualTaskView(task: individualTask.init(id: 2, title: "", color1: "", color2: "")),
+                    destination: IndividualTaskView(taskType: taskType, tasksLeft: ""),
                     label: {
                         Text("Cancel")
                             .frame(width: 280, height: 50)

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct individualTask: Hashable {
-    var id: Int
     let title: String
     let color1, color2: String
     
@@ -19,24 +18,27 @@ struct IndividualTaskView: View {
         Array(repeating: .init(.flexible(maximum: 160), spacing: 30, alignment: .center), count: 2)
     
     //MARK:- Diffferent Arrays
-    let individualTasksUrgent:[individualTask] = [
-        individualTask(id: 1, title: "Kidnap the kids", color1: "TaskRed1", color2: "TaskRed2")
+    @State var individualTasksUrgent:[individualTask] = [
+        individualTask(title: "Kidnap the kids", color1: "TaskRed1", color2: "TaskRed2")
     ]
     
-    let individualTasksWork:[individualTask] = [
-        individualTask(id: 1, title: "Kidnap the kids at work", color1: "TaskBlue1", color2: "TaskBlue2")
+    @State var individualTasksWork:[individualTask] = [
+        individualTask(title: "Kidnap the kids at work", color1: "TaskBlue1", color2: "TaskBlue2")
     ]
     
-    let individualTasksGroceries:[individualTask] = [
-        individualTask(id: 1, title: "Kidnap the kids at groceries", color1: "TaskGreen1", color2: "TaskGreen2")
+    @State var individualTasksGroceries:[individualTask] = [
+        individualTask(title: "Kidnap the kids at groceries", color1: "TaskGreen1", color2: "TaskGreen2")
     ]
     
-    let individualTasksMiscellaneous:[individualTask] = [
-        individualTask(id: 1, title: "Kidnap the kids at miscellaneous", color1: "TaskGrey1", color2: "TaskGrey2")
+    @State var individualTasksMiscellaneous:[individualTask] = [
+        individualTask(title: "Kidnap the kids at miscellaneous", color1: "TaskGrey1", color2: "TaskGrey2")
     ]
-    //Passed Items
+    //MARK:- Passed Items
     var taskType: String
     var tasksLeft: String
+    
+    //MARK:- Properties to pass and recieve from modal view
+    @State private var presentViewModal: Bool = false
     
     var body: some View {
         //MARK:- Header 
@@ -71,7 +73,7 @@ struct IndividualTaskView: View {
                 //MARK:- LazyVGrid Here
                 VStack{
                     //Creating the scrollview
-                    ScrollView{
+                    ScrollView(.vertical){
                         LazyVGrid(columns: columns, spacing: 20){
                             //Checking what task type
                             if taskType.lowercased() == "urgent"{
@@ -96,28 +98,47 @@ struct IndividualTaskView: View {
                             }
                         }
                         .padding()
-                    }.offset(x: 0, y: 40)
+                        
+                    }
+                    .offset(x: 0, y: 40)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                
+                //MARK:- Present Task Add Screen
+            HStack {
                 Spacer()
-                HStack {
-                    Spacer()
-                    NavigationLink(
-                        destination: TaskAddScreen(taskType: taskType),
-                        label: {
-                            Image(systemName: "text.badge.plus")
-                                .resizable()
-                                .renderingMode(.original)
-                                .foregroundColor(.black)
-                                .frame(width: 40, height: 40)
-                                .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 55))
-                    })
-                }.padding()
-
+                Button(action: {self.presentViewModal = true}, label: {
+                    Image(systemName: "text.badge.plus")
+                        .resizable()
+                        .renderingMode(.original)
+                        .foregroundColor(.black)
+                        .frame(width: 40, height: 40)
+                        .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 55))
+                }).sheet(isPresented: $presentViewModal, content: {
+                    TaskAddScreen(presentViewModal: $presentViewModal, addTask: {
+                        taskAdded in
+                        if taskType.lowercased() == "urgent"{
+                            individualTasksUrgent.append(taskAdded)
+                        }
+                        if taskType.lowercased() == "work"{
+                            individualTasksWork.append(taskAdded)
+                        }
+                        if taskType.lowercased() == "groceries"{
+                            individualTasksGroceries.append(taskAdded)
+                        }
+                        if taskType.lowercased() == "miscellaneous"{
+                            individualTasksMiscellaneous.append(taskAdded)
+                        }
+                    }, taskType: taskType)
+                })
+                
+            }.padding()
+            .offset(x:0, y:60)
             }
+            //.offset(x:0,y:20)
         }
         //Offset Navigation Bar Size
         .offset(x:0 , y: -60)
+        .frame(maxHeight: .infinity)
     }
 }
 
@@ -178,7 +199,9 @@ struct TaskCellView_Previews: PreviewProvider{
 
 struct IndividualTaskView_Previews: PreviewProvider {
     static var previews: some View {
-        IndividualTaskView(taskType: "", tasksLeft: "")
-            .previewDevice("iPhone 12 Pro Max")
+        Group {
+            IndividualTaskView(taskType: "", tasksLeft: "")
+                .previewDevice("iPhone 12 Pro Max")
+        }
     }
 }

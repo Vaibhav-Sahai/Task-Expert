@@ -67,13 +67,11 @@ struct IndividualTaskView: View {
                     .minimumScaleFactor(0.25)
                     .lineLimit(1)
                     .allowsTightening(true)
-                
                 Spacer()
-                
                 //MARK:- LazyVGrid Here
                 VStack{
                     //Creating the scrollview
-                    ScrollView(.vertical){
+                    ScrollView(){
                         LazyVGrid(columns: columns, spacing: 20){
                             //Checking what task type
                             if taskType.lowercased() == "urgent"{
@@ -98,47 +96,52 @@ struct IndividualTaskView: View {
                             }
                         }
                         .padding()
-                        
                     }
-                    .offset(x: 0, y: 40)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    //.offset(x: 0, y: 40)
                 }
-                //MARK:- Present Task Add Screen
-            HStack {
-                Spacer()
-                Button(action: {self.presentViewModal = true}, label: {
-                    Image(systemName: "text.badge.plus")
-                        .resizable()
-                        .renderingMode(.original)
-                        .foregroundColor(.black)
-                        .frame(width: 40, height: 40)
-                        .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 55))
-                }).sheet(isPresented: $presentViewModal, content: {
-                    TaskAddScreen(presentViewModal: $presentViewModal, addTask: {
-                        taskAdded in
-                        if taskType.lowercased() == "urgent"{
-                            individualTasksUrgent.append(taskAdded)
-                        }
-                        if taskType.lowercased() == "work"{
-                            individualTasksWork.append(taskAdded)
-                        }
-                        if taskType.lowercased() == "groceries"{
-                            individualTasksGroceries.append(taskAdded)
-                        }
-                        if taskType.lowercased() == "miscellaneous"{
-                            individualTasksMiscellaneous.append(taskAdded)
-                        }
-                    }, taskType: taskType)
-                })
-                
-            }.padding()
-            .offset(x:0, y:60)
+                .offset(x: 0, y: 40)
+
             }
+           
+                //MARK:- Present Task Add Screen
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: {self.presentViewModal = true}, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.black)
+                            //.background(Color(.black))
+                            .frame(width: 40, height: 40)
+                            .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 60))
+                    }).sheet(isPresented: $presentViewModal, content: {
+                        TaskAddScreen(presentViewModal: $presentViewModal, addTask: {
+                            taskAdded in
+                            if taskType.lowercased() == "urgent"{
+                                individualTasksUrgent.append(taskAdded)
+                            }
+                            if taskType.lowercased() == "work"{
+                                individualTasksWork.append(taskAdded)
+                            }
+                            if taskType.lowercased() == "groceries"{
+                                individualTasksGroceries.append(taskAdded)
+                            }
+                            if taskType.lowercased() == "miscellaneous"{
+                                individualTasksMiscellaneous.append(taskAdded)
+                            }
+                        }, taskType: taskType)
+                    })
+                    
+                }.padding()
+            }
+            .offset(x: 0, y: 60)
+            //.offset(x:0, y:60)
             //.offset(x:0,y:20)
         }
         //Offset Navigation Bar Size
         .offset(x:0 , y: -60)
-        .frame(maxHeight: .infinity)
     }
 }
 
@@ -155,7 +158,7 @@ struct TaskCellView: View {
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
                 .minimumScaleFactor(0.25)
-                .lineLimit(6)
+                .lineLimit(5)
                 .allowsTightening(true)
                 .padding()
             HStack {
@@ -181,7 +184,7 @@ struct TaskCellView: View {
             }
             Spacer()
         }
-        .frame(width: 180, height: 240, alignment: .center)
+        .frame(width: 180, height: 220, alignment: .center)
         .background(LinearGradient(gradient: Gradient(colors: [Color(task.color1), Color(task.color2)]), startPoint: .top, endPoint: .bottom))
         .cornerRadius(50)
         .shadow(color: .gray, radius: 10)
@@ -192,10 +195,12 @@ struct TaskCellView: View {
 //MARK:- Preview Cell View
 struct TaskCellView_Previews: PreviewProvider{
     static var previews: some View{
-        individualTaskView(task: individualTask.init(id: 1, title: "Pick up tomatos lettuce cream and soda", color1: "TaskBlue1", color2: "TaskBlue2"))
+        TaskCellView(task: individualTask.init(title: "Pick up tomatos lettuce cream and soda, test test test test test test test test ", color1: "TaskBlue1", color2: "TaskBlue2"))
+            .previewDevice("iPhone 12 Pro Max")
     }
 }
 */
+
 
 struct IndividualTaskView_Previews: PreviewProvider {
     static var previews: some View {

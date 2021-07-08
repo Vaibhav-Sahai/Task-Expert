@@ -12,7 +12,8 @@ struct TaskAddScreen: View {
     @Binding var presentViewModal: Bool
     var addTask: (individualTask) -> ()
     //MARK:- Info Taken From Form Here
-    @State var taskBody: String = ""
+    @State var showError:Bool = false
+    @State var taskBody: String = "Task Body"
     @State var colorScheme: String = "Red"
     @State var color1: String = "TaskRed1"
     @State var color2: String = "TaskRed2"
@@ -30,6 +31,10 @@ struct TaskAddScreen: View {
             Form{
                 Section(header: Text("New Task Information")) {
                     TextField("Task Body", text: $taskBody )
+                        .foregroundColor(.gray)
+                        .onTapGesture {
+                            self.taskBody = ""
+                        }
                     Text("Choose Task Color Scheme")
                     Picker("Choose Color", selection: $colorScheme, content: {
                         Text("Red").tag("Red")
@@ -44,10 +49,21 @@ struct TaskAddScreen: View {
             
             //MARK:- Add Task
             VStack(spacing: 10) {
+                if showError == true {
+                    Text("Error: Please Fill Task Body")
+                        .font(.body).bold()
+                        .foregroundColor(.red)
+                }
                 Button(action: {
-                    self.presentViewModal = false
-                    colorChooser()
-                    addTask(.init(title: taskBody, color1: color1, color2: color2))
+                    if checkTaskBody() == "Empty String"{
+                        showError = true
+                    }
+                    else{
+                        showError = false
+                        self.presentViewModal = false
+                        colorChooser()
+                        addTask(.init(title: taskBody, color1: color1, color2: color2))
+                    }
                     
                 }, label: {
                     Text("Add Task")
@@ -91,6 +107,17 @@ struct TaskAddScreen: View {
         if colorScheme == "Grey"{
             color1 = "TaskGrey1"
             color2 = "TaskGrey2"
+        }
+    }
+    func checkTaskBody() -> String{
+        if taskBody.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            return "Empty String"
+        }
+        else if taskBody == "Task Body"{
+            return "Empty String"
+        }
+        else{
+            return "No Problemo"
         }
     }
 }

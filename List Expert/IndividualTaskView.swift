@@ -7,10 +7,18 @@
 
 import SwiftUI
 
-struct individualTask: Hashable {
+struct individualTask: Hashable, Codable {
     let title: String
     let color1, color2: String
     
+}
+
+//MARK:- User Default Keys
+struct UserDefaultKeys {
+    static let SavedIndividualTasksUrgent:[individualTask] = []
+    static let SavedIndividualTasksWork:[individualTask] = []
+    static let SavedIndividualTasksGroceries:[individualTask] = []
+    static let SavedIndividualTasksMiscellaneous:[individualTask] = []
 }
 
 struct IndividualTaskView: View {
@@ -33,6 +41,7 @@ struct IndividualTaskView: View {
     @State var individualTasksMiscellaneous:[individualTask] = [
         individualTask(title: "Misc Task Screen", color1: "TaskGrey1", color2: "TaskGrey2")
     ]
+   
     //MARK:- Passed Items
     var taskType: String
     var tasksLeft: String
@@ -103,7 +112,7 @@ struct IndividualTaskView: View {
 
             }
            
-                //MARK:- Present Task Add Screen
+            //MARK:- Present Task Add Screen
             VStack {
                 Spacer()
                 HStack {

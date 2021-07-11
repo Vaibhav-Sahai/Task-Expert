@@ -19,19 +19,19 @@ struct IndividualTaskView: View {
     
     //MARK:- Diffferent Arrays
     @State var individualTasksUrgent:[individualTask] = [
-        individualTask(title: "Kidnap the kids", color1: "TaskRed1", color2: "TaskRed2")
+        individualTask(title: "Urgernt Task Screen", color1: "TaskRed1", color2: "TaskRed2")
     ]
     
     @State var individualTasksWork:[individualTask] = [
-        individualTask(title: "Kidnap the kids at work", color1: "TaskBlue1", color2: "TaskBlue2")
+        individualTask(title: "Work Task Screen", color1: "TaskBlue1", color2: "TaskBlue2")
     ]
     
     @State var individualTasksGroceries:[individualTask] = [
-        individualTask(title: "Kidnap the kids at groceries", color1: "TaskGreen1", color2: "TaskGreen2")
+        individualTask(title: "Grocereies Task Screen", color1: "TaskGreen1", color2: "TaskGreen2")
     ]
     
     @State var individualTasksMiscellaneous:[individualTask] = [
-        individualTask(title: "Kidnap the kids at miscellaneous", color1: "TaskGrey1", color2: "TaskGrey2")
+        individualTask(title: "Misc Task Screen", color1: "TaskGrey1", color2: "TaskGrey2")
     ]
     //MARK:- Passed Items
     var taskType: String

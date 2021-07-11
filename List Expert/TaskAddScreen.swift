@@ -12,6 +12,7 @@ struct TaskAddScreen: View {
     @Binding var presentViewModal: Bool
     var addTask: (individualTask) -> ()
     //MARK:- Info Taken From Form Here
+    @State var tappedTaskBody:Bool = false
     @State var showError:Bool = false
     @State var taskBody: String = "Task Body"
     @State var colorScheme: String = "Red"
@@ -30,11 +31,18 @@ struct TaskAddScreen: View {
             //MARK:- Info Form
             Form{
                 Section(header: Text("New Task Information")) {
-                    TextField("Task Body", text: $taskBody )
+                    if tappedTaskBody == false{
+                        TextField("Task Body", text: $taskBody )
                         .foregroundColor(.gray)
-                        .onTapGesture {
-                            self.taskBody = ""
-                        }
+                            .onTapGesture {
+                                self.taskBody = ""
+                                self.tappedTaskBody = true
+                            }
+
+                    }else{
+                        TextField("Task Body", text: $taskBody )
+                        .foregroundColor(.black)
+                    }
                     Text("Choose Task Color Scheme")
                     Picker("Choose Color", selection: $colorScheme, content: {
                         Text("Red").tag("Red")
@@ -124,6 +132,7 @@ struct TaskAddScreen: View {
 
 struct TaskAddScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TaskAddScreen(presentViewModal: .constant(false), addTask: {_ in print(123)} , taskBody: "", taskType: "" ) //innit preview
+        TaskAddScreen(presentViewModal: .constant(false), addTask: {_ in print(123)} , taskBody: "", taskType: "" )
+            .previewDevice("iPhone 12 Pro Max") //innit preview
     }
 }

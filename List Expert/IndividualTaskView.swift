@@ -15,10 +15,10 @@ struct individualTask: Hashable, Codable {
 
 //MARK:- User Default Keys
 struct UserDefaultKeys {
-    static let SavedIndividualTasksUrgent:[individualTask] = []
-    static let SavedIndividualTasksWork:[individualTask] = []
-    static let SavedIndividualTasksGroceries:[individualTask] = []
-    static let SavedIndividualTasksMiscellaneous:[individualTask] = []
+    static let SavedIndividualTasksUrgent = "SavedIndividualTasksUrgent"
+    static let SavedIndividualTasksWork = "SavedIndividualTasksWork"
+    static let SavedIndividualTasksGroceries = "SavedIndividualTasksGroceries"
+    static let SavedIndividualTasksMiscellaneous = "SavedIndividualTasksMiscellaneous"
 }
 
 struct IndividualTaskView: View {
@@ -27,21 +27,37 @@ struct IndividualTaskView: View {
     
     //MARK:- Diffferent Arrays
     @State var individualTasksUrgent:[individualTask] = [
-        individualTask(title: "Urgernt Task Screen", color1: "TaskRed1", color2: "TaskRed2")
-    ]
+        //individualTask(title: "Urgernt Task Screen", color1: "TaskRed1", color2: "TaskRed2")
+    ]{
+        didSet {
+            saveItems()
+        }
+    }
     
     @State var individualTasksWork:[individualTask] = [
-        individualTask(title: "Work Task Screen", color1: "TaskBlue1", color2: "TaskBlue2")
-    ]
+        //individualTask(title: "Work Task Screen", color1: "TaskBlue1", color2: "TaskBlue2")
+    ]{
+        didSet{
+            saveItems()
+        }
+    }
     
     @State var individualTasksGroceries:[individualTask] = [
-        individualTask(title: "Grocereies Task Screen", color1: "TaskGreen1", color2: "TaskGreen2")
-    ]
+        //individualTask(title: "Grocereies Task Screen", color1: "TaskGreen1", color2: "TaskGreen2")
+    ]{
+        didSet{
+            saveItems()
+        }
+    }
     
     @State var individualTasksMiscellaneous:[individualTask] = [
-        individualTask(title: "Misc Task Screen", color1: "TaskGrey1", color2: "TaskGrey2")
-    ]
-   
+        //individualTask(title: "Misc Task Screen", color1: "TaskGrey1", color2: "TaskGrey2")
+    ]{
+        didSet{
+            saveItems()
+        }
+    }
+    
     //MARK:- Passed Items
     var taskType: String
     var tasksLeft: String
@@ -151,6 +167,58 @@ struct IndividualTaskView: View {
         }
         //Offset Navigation Bar Size
         .offset(x:0 , y: -60)
+        .onAppear{
+            getItems()
+            //FOR DEV USE ONLY
+            //resetDefaults()
+        }
+    }
+    //MARK:- Save All Arrays
+    func saveItems(){
+        if let encodedDataUrgent = try? JSONEncoder().encode(individualTasksUrgent){
+            UserDefaults.standard.set(encodedDataUrgent, forKey: UserDefaultKeys.SavedIndividualTasksUrgent)
+        }
+        if let encodedDataWork = try? JSONEncoder().encode(individualTasksWork){
+            UserDefaults.standard.set(encodedDataWork, forKey: UserDefaultKeys.SavedIndividualTasksWork)
+        }
+        if let encodedDataGroceries = try? JSONEncoder().encode(individualTasksGroceries){
+            UserDefaults.standard.set(encodedDataGroceries, forKey: UserDefaultKeys.SavedIndividualTasksGroceries)
+        }
+        if let encodedDataMiscellaneous = try? JSONEncoder().encode(individualTasksMiscellaneous){
+            UserDefaults.standard.set(encodedDataMiscellaneous, forKey: UserDefaultKeys.SavedIndividualTasksMiscellaneous)
+        }
+    }
+    
+    //MARK:- Load All Arrays
+    func getItems(){
+        //Decoding
+        guard
+            let urgentTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksUrgent),
+            let SavedUrgentTaskData = try? JSONDecoder().decode([individualTask].self, from: urgentTaskData),
+            
+            let workTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksWork),
+            let SavedWorkTaskData = try? JSONDecoder().decode([individualTask].self, from: workTaskData),
+            
+            let groceriesTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksGroceries),
+            let SavedGroceriesTaskData = try? JSONDecoder().decode([individualTask].self, from: groceriesTaskData),
+            
+            let miscellaneousTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksMiscellaneous),
+            let SavedMiscellaneousTaskData = try? JSONDecoder().decode([individualTask].self, from: miscellaneousTaskData)
+            
+        else { return }
+        self.individualTasksUrgent = SavedUrgentTaskData
+        self.individualTasksWork = SavedWorkTaskData
+        self.individualTasksGroceries = SavedGroceriesTaskData
+        self.individualTasksMiscellaneous = SavedMiscellaneousTaskData
+    }
+    
+    //MARK:- Clear User Defaults
+    func resetDefaults() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
+        }
     }
 }
 

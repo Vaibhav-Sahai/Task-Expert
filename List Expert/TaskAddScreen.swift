@@ -7,19 +7,51 @@
 
 import SwiftUI
 
+//MARK:- User Default Keys
+struct Keys{
+    static let urgentTittles = "urgentTittles"
+    static let workTittles = "workTittles"
+    static let groceriesTittles = "groceriesTittles"
+    static let miscellaneousTittles = "miscellaneousTittles"
+}
+
 struct TaskAddScreen: View {
     //MARK:- Data To Be Recieved And Passed
     @Binding var presentViewModal: Bool
     var addTask: (individualTask) -> ()
     //MARK:- Info Taken From Form Here
-    @State var tappedTaskBody:Bool = false
-    @State var showError:Bool = false
+    @State var tappedTaskBody: Bool = false
+    @State var errorMessage: String = ""
+    @State var showError: Bool = false
     @State var taskBody: String = "Task Body"
     @State var colorScheme: String = "Red"
     @State var color1: String = "TaskRed1"
     @State var color2: String = "TaskRed2"
     
     let taskType: String
+    
+    //MARK:- Array Of Task Tittles Passed
+    @State var taskTittlesUrgent: [String] = []{
+        didSet{
+            saveData()
+        }
+    }
+    @State var taskTittlesWork: [String] = []{
+        didSet{
+            saveData()
+        }
+    }
+    @State var taskTittlesGroceries: [String] = []{
+        didSet{
+            saveData()
+        }
+    }
+    @State var taskTittlesMiscellaneous: [String] = []{
+        didSet{
+            saveData()
+        }
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -58,19 +90,38 @@ struct TaskAddScreen: View {
             //MARK:- Add Task
             VStack(spacing: 10) {
                 if showError == true {
-                    Text("Error: Please Fill Task Body")
+                    Text(errorMessage)
                         .font(.body).bold()
                         .foregroundColor(.red)
+                        .multilineTextAlignment(.center)
+                        .padding()
                 }
                 Button(action: {
-                    if checkTaskBody() == "Empty String"{
+                    if checkTaskBody() == true{
                         showError = true
                     }
                     else{
-                        showError = false
-                        self.presentViewModal = false
-                        colorChooser()
-                        addTask(.init(title: taskBody, color1: color1, color2: color2))
+                        if isTaskInVgrid() == true{
+                            errorMessage = "Error: Task Has Already Been Entered In \(taskType) Tasks"
+                            showError = true
+                        }else{
+                            if taskType.lowercased() == "urgent"{
+                                taskTittlesUrgent.append(taskBody)
+                            }
+                            else if taskType.lowercased() == "work"{
+                                taskTittlesWork.append(taskBody)
+                            }
+                            else if taskType.lowercased() == "groceries"{
+                                taskTittlesGroceries.append(taskBody)
+                            }
+                            else{
+                                taskTittlesMiscellaneous.append(taskBody)
+                            }
+                            self.presentViewModal = false
+                            colorChooser()
+                            addTask(.init(title: taskBody, color1: color1, color2: color2))
+                        }
+                        
                     }
                     
                 }, label: {
@@ -97,6 +148,9 @@ struct TaskAddScreen: View {
             }
             
         }
+        .onAppear{
+            getData()
+        }
     }
     //MARK:- Choose Color
     func colorChooser(){
@@ -117,22 +171,66 @@ struct TaskAddScreen: View {
             color2 = "TaskGrey2"
         }
     }
-    func checkTaskBody() -> String{
-        if taskBody.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
-            return "Empty String"
+    //MARK:- Checking TaskBody Text
+    func isTaskInVgrid() -> Bool{
+        if taskType.lowercased() == "urgent" && taskTittlesUrgent.contains(taskBody){
+            return true
         }
-        else if taskBody == "Task Body"{
-            return "Empty String"
+        else if taskType.lowercased() == "work" && taskTittlesWork.contains(taskBody){
+            return true
+        }
+        else if taskType.lowercased() == "groceries" && taskTittlesGroceries.contains(taskBody){
+            return true
+        }
+        else if taskType.lowercased() == "miscellaneous" && taskTittlesMiscellaneous.contains(taskBody){
+            return true
         }
         else{
-            return "No Problemo"
+            return false
         }
     }
+    //MARK:- Checking for Errors
+    func checkTaskBody() -> Bool{
+        if taskBody.trimmingCharacters(in: .whitespacesAndNewlines) == "" || taskBody == "Task Body"{
+            self.errorMessage = "Error: Please Fill Task Body"
+            return true
+        }
+        //else if taskType.lowercased() == "urgent" && taskArrayUrgent.contains(individualTask(title: taskBody)){
+            //return true
+        //}
+        else{
+            return false
+        }
+    }
+    
+    //MARK:- Saving Data
+    func saveData(){
+        UserDefaults.standard.set(taskTittlesUrgent, forKey: Keys.urgentTittles)
+        UserDefaults.standard.set(taskTittlesWork, forKey: Keys.workTittles)
+        UserDefaults.standard.set(taskTittlesGroceries, forKey: Keys.groceriesTittles)
+        UserDefaults.standard.set(taskTittlesMiscellaneous, forKey: Keys.miscellaneousTittles)
+    }
+    
+    //MARK:- Loading Data
+    func getData(){
+        guard
+            let savedUrgentTittles = UserDefaults.standard.stringArray(forKey: Keys.urgentTittles),
+            let savedWorkTittles = UserDefaults.standard.stringArray(forKey: Keys.workTittles),
+            let savedGroceriesTittles = UserDefaults.standard.stringArray(forKey: Keys.groceriesTittles),
+            let savedMiscellaneousTittles = UserDefaults.standard.stringArray(forKey: Keys.miscellaneousTittles)
+        else { return }
+        
+        self.taskTittlesUrgent = savedUrgentTittles
+        self.taskTittlesWork = savedWorkTittles
+        self.taskTittlesGroceries = savedGroceriesTittles
+        self.taskTittlesMiscellaneous = savedMiscellaneousTittles
+    }
+    
 }
 
 struct TaskAddScreen_Previews: PreviewProvider {
     static var previews: some View {
-        TaskAddScreen(presentViewModal: .constant(false), addTask: {_ in print(123)} , taskBody: "", taskType: "" )
+        TaskAddScreen(presentViewModal: .constant(false), addTask: {_ in print(123)} , taskBody: "", taskType: "")
             .previewDevice("iPhone 12 Pro Max") //innit preview
     }
 }

@@ -194,11 +194,7 @@ struct TaskAddScreen: View {
         if taskBody.trimmingCharacters(in: .whitespacesAndNewlines) == "" || taskBody == "Task Body"{
             self.errorMessage = "Error: Please Fill Task Body"
             return true
-        }
-        //else if taskType.lowercased() == "urgent" && taskArrayUrgent.contains(individualTask(title: taskBody)){
-            //return true
-        //}
-        else{
+        } else{
             return false
         }
     }

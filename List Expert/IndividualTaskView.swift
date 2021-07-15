@@ -121,8 +121,9 @@ struct IndividualTaskView: View {
                             }
                         }
                         .padding()
-                        .ignoresSafeArea(.keyboard, edges: .bottom)
+                        .ignoresSafeArea(.container, edges: .bottom)
                     }
+                    .ignoresSafeArea(.container, edges: .bottom)
                     //.offset(x: 0, y: 40)
                 }
                 .offset(x: 0, y: 40)

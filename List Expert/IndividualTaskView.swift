@@ -28,41 +28,6 @@ struct IndividualTaskView: View {
     var columns: [GridItem] =
         Array(repeating: .init(.flexible(maximum: 160), spacing: 30, alignment: .center), count: 2)
     
-    //MARK:- Diffferent Arrays
-    /*
-    @State var individualTasksUrgent:[individualTask] = [
-        //individualTask(title: "Urgernt Task Screen", color1: "TaskRed1", color2: "TaskRed2")
-    ]{
-        didSet {
-            saveItems()
-            figureRemainingTasks()
-        }
-    }
-    */
-    @State var individualTasksWork:[individualTask] = [
-        //individualTask(title: "Work Task Screen", color1: "TaskBlue1", color2: "TaskBlue2")
-    ]{
-        didSet{
-            saveItems()
-        }
-    }
-    
-    @State var individualTasksGroceries:[individualTask] = [
-        //individualTask(title: "Grocereies Task Screen", color1: "TaskGreen1", color2: "TaskGreen2")
-    ]{
-        didSet{
-            saveItems()
-        }
-    }
-    
-    @State var individualTasksMiscellaneous:[individualTask] = [
-        //individualTask(title: "Misc Task Screen", color1: "TaskGrey1", color2: "TaskGrey2")
-    ]{
-        didSet{
-            saveItems()
-        }
-    }
-    
     //MARK:- Passed Items
     var taskType: String
     var tasksLeft: String
@@ -90,12 +55,39 @@ struct IndividualTaskView: View {
                         .lineLimit(1)
                         .allowsTightening(true)
                 }
-                Text("\(viewModelGlobal.taskRemainingUrgent) Tasks")
-                    .font(.title3)
-                    .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                    .minimumScaleFactor(0.25)
-                    .lineLimit(1)
-                    .allowsTightening(true)
+                if taskType.lowercased() == "urgent"{
+                    Text("\(viewModelGlobal.taskRemainingUrgent) Tasks")
+                        .font(.title3)
+                        .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                        .minimumScaleFactor(0.25)
+                        .lineLimit(1)
+                        .allowsTightening(true)
+                }
+                else if taskType.lowercased() == "work"{
+                    Text("\(viewModelGlobal.taskRemainingWork) Tasks")
+                        .font(.title3)
+                        .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                        .minimumScaleFactor(0.25)
+                        .lineLimit(1)
+                        .allowsTightening(true)
+                }
+                else if taskType.lowercased() == "groceries"{
+                    Text("\(viewModelGlobal.taskRemainingGroceries) Tasks")
+                        .font(.title3)
+                        .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                        .minimumScaleFactor(0.25)
+                        .lineLimit(1)
+                        .allowsTightening(true)
+                }
+                else if taskType.lowercased() == "miscellaneous"{
+                    Text("\(viewModelGlobal.taskRemainingMiscellaneous) Tasks")
+                        .font(.title3)
+                        .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                        .minimumScaleFactor(0.25)
+                        .lineLimit(1)
+                        .allowsTightening(true)
+                }
+                
                 Spacer()
                 //MARK:- LazyVGrid Here
                 VStack{
@@ -109,17 +101,17 @@ struct IndividualTaskView: View {
                                 }
                             }
                             if taskType.lowercased() == "work"{
-                                ForEach(individualTasksWork, id: \.self){
+                                ForEach(viewModelGlobal.individualTasksWork, id: \.self){
                                     Task in TaskCellView(task: Task)
                                 }
                             }
                             if taskType.lowercased() == "groceries"{
-                                ForEach(individualTasksGroceries, id: \.self){
+                                ForEach(viewModelGlobal.individualTasksGroceries, id: \.self){
                                     Task in TaskCellView(task: Task)
                                 }
                             }
                             if taskType.lowercased() == "miscellaneous"{
-                                ForEach(individualTasksMiscellaneous, id: \.self){
+                                ForEach(viewModelGlobal.individualTasksMiscellaneous, id: \.self){
                                     Task in TaskCellView(task: Task)
                                 }
                             }
@@ -151,16 +143,16 @@ struct IndividualTaskView: View {
                         TaskAddScreen(presentViewModal: $presentViewModal, addTask: {
                             taskAdded in
                             if taskType.lowercased() == "urgent"{
-                                viewModelGlobal.addItem(item: taskAdded)
+                                viewModelGlobal.addItem(item: taskAdded, taskType: taskType)
                             }
                             if taskType.lowercased() == "work"{
-                                individualTasksWork.append(taskAdded)
+                                viewModelGlobal.addItem(item: taskAdded, taskType: taskType)
                             }
                             if taskType.lowercased() == "groceries"{
-                                individualTasksGroceries.append(taskAdded)
+                                viewModelGlobal.addItem(item: taskAdded, taskType: taskType)
                             }
                             if taskType.lowercased() == "miscellaneous"{
-                                individualTasksMiscellaneous.append(taskAdded)
+                                viewModelGlobal.addItem(item: taskAdded, taskType: taskType)
                             }
                         }, taskType: taskType)
                     })
@@ -174,58 +166,10 @@ struct IndividualTaskView: View {
         //Offset Navigation Bar Size
         .offset(x:0 , y: -60)
         .onAppear{
-            getItems()
-            //print("On Task View Screen")
-            //print(env.taskRemainingUrgent)
-            //env.figureRemaining()
-            //FOR DEV USE ONLY
-            //resetDefaults()
+            
         }
         .onDisappear{
         }
-    }
-    //MARK:- Taking Care of Global Env
-    func figureRemainingTasks(){
-        //env.taskRemainingUrgent = individualTasksUrgent.count
-    }
-    
-    //MARK:- Save All Arrays
-    func saveItems(){
-        //if let encodedDataUrgent = try? JSONEncoder().encode(individualTasksUrgent){
-            //UserDefaults.standard.set(encodedDataUrgent, forKey: UserDefaultKeys.SavedIndividualTasksUrgent)
-        //}
-        if let encodedDataWork = try? JSONEncoder().encode(individualTasksWork){
-            UserDefaults.standard.set(encodedDataWork, forKey: UserDefaultKeys.SavedIndividualTasksWork)
-        }
-        if let encodedDataGroceries = try? JSONEncoder().encode(individualTasksGroceries){
-            UserDefaults.standard.set(encodedDataGroceries, forKey: UserDefaultKeys.SavedIndividualTasksGroceries)
-        }
-        if let encodedDataMiscellaneous = try? JSONEncoder().encode(individualTasksMiscellaneous){
-            UserDefaults.standard.set(encodedDataMiscellaneous, forKey: UserDefaultKeys.SavedIndividualTasksMiscellaneous)
-        }
-    }
-    
-    //MARK:- Load All Arrays
-    func getItems(){
-        //Decoding
-        guard
-            //let urgentTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksUrgent),
-            //let SavedUrgentTaskData = try? JSONDecoder().decode([individualTask].self, from: urgentTaskData),
-            
-            let workTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksWork),
-            let SavedWorkTaskData = try? JSONDecoder().decode([individualTask].self, from: workTaskData),
-            
-            let groceriesTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksGroceries),
-            let SavedGroceriesTaskData = try? JSONDecoder().decode([individualTask].self, from: groceriesTaskData),
-            
-            let miscellaneousTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksMiscellaneous),
-            let SavedMiscellaneousTaskData = try? JSONDecoder().decode([individualTask].self, from: miscellaneousTaskData)
-            
-        else { return }
-        //self.individualTasksUrgent = SavedUrgentTaskData
-        self.individualTasksWork = SavedWorkTaskData
-        self.individualTasksGroceries = SavedGroceriesTaskData
-        self.individualTasksMiscellaneous = SavedMiscellaneousTaskData
     }
     
     //MARK:- Clear User Defaults

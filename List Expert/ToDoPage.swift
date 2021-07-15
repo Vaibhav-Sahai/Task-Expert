@@ -87,9 +87,9 @@ struct ToDoPage: View {
             self.dateFormatterTool()
             Tasks = [
                 Task(id: 0, title: "Urgent", image: "exclamationmark", remaining: "\(viewModelGlobal.taskRemainingUrgent)", taskType: "Urgent", colorIcon: Color("LightRed"), colorCell: .red),
-                Task(id: 1, title: "Work", image: "bag.fill", remaining: "0", taskType: "Work", colorIcon: Color("LightBlue"), colorCell: .blue),
-                Task(id: 2, title: "Groceries", image: "cart", remaining: "0", taskType: "Groceries", colorIcon: Color("LightGreen"), colorCell: .green),
-                Task(id: 3, title: "Miscellaneous", image: "pencil", remaining: "0", taskType: "Miscellaneous", colorIcon: Color("LightGray"), colorCell: .gray)
+                Task(id: 1, title: "Work", image: "bag.fill", remaining: "\(viewModelGlobal.taskRemainingWork)", taskType: "Work", colorIcon: Color("LightBlue"), colorCell: .blue),
+                Task(id: 2, title: "Groceries", image: "cart", remaining: "\(viewModelGlobal.taskRemainingGroceries)", taskType: "Groceries", colorIcon: Color("LightGreen"), colorCell: .green),
+                Task(id: 3, title: "Miscellaneous", image: "pencil", remaining: "\(viewModelGlobal.taskRemainingMiscellaneous)", taskType: "Miscellaneous", colorIcon: Color("LightGray"), colorCell: .gray)
             ]
             //print("On Home Screen")
             //print(env.taskRemainingUrgent)

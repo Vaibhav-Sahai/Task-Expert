@@ -41,7 +41,7 @@ struct ContentView: View {
                             .animation(Animation.easeIn.delay(0.1))
                     }
                     
-                    WelcomeTextView(tasks: 10) //Does the Welcome Text
+                    WelcomeTextView(remaining: viewModelGlobal.totalRemaining, tasks: 10) //Does the Welcome Text
                     Spacer()
                     //Buttons:
                     VStack(spacing: 10){
@@ -119,10 +119,11 @@ struct ContentView_Previews: PreviewProvider {
 
 //MARK:- Pass Parameter To Number of Task Here
 struct WelcomeTextView: View{
+    var remaining: Int
     var tasks: Int
     var body: some View{
         HStack(spacing: 5){
-            Text("You've \(tasks) Tasks Pending!")
+            Text("You've \(remaining) Tasks Pending!")
                 .font(.system(size: 24, weight: .regular, design: .default))
                 .padding()
                 .animation(Animation.easeIn.delay(0.2))

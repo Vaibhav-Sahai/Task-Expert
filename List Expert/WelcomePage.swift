@@ -9,6 +9,8 @@ import SwiftUI
 
 //MARK:- Intro Text
 struct ContentView: View {
+    //MARK:- Instating Global Env
+    @StateObject var viewModelGlobal: GlobalEnvironment = GlobalEnvironment()
     @State private var alertIsPresented = true
     @State var username = ""
     @State var show = false
@@ -79,9 +81,12 @@ struct ContentView: View {
                     
                 }
 
+            }.onAppear{
+                
             }
             .navigationBarHidden(true)
         }
+        .environmentObject(viewModelGlobal)
         //Color of Back Button
         .accentColor(.black)
     }

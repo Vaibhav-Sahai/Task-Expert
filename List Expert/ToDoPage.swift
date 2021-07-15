@@ -16,21 +16,27 @@ struct Task: Hashable{
 }
 
 struct ToDoPage: View {
-
+    @EnvironmentObject var viewModelGlobal: GlobalEnvironment
     var columns: [GridItem] =
         Array(repeating: .init(.flexible(maximum: 160), spacing: 30, alignment: .center), count: 2)
 
     @State var dateAndTime = "" //Init Identifier
-    
+
     //MARK:- Assigning Data to Cells
-    let Tasks: [Task] = [
-        Task(id: 0, title: "Urgent", image: "exclamationmark", remaining: "0", taskType: "Urgent", colorIcon: Color("LightRed"), colorCell: .red),
-        Task(id: 1, title: "Work", image: "bag.fill", remaining: "0", taskType: "Work", colorIcon: Color("LightBlue"), colorCell: .blue),
-        Task(id: 2, title: "Groceries", image: "cart", remaining: "0", taskType: "Groceries", colorIcon: Color("LightGreen"), colorCell: .green),
-        Task(id: 3, title: "Miscellaneous", image: "pencil", remaining: "0", taskType: "Miscellaneous", colorIcon: Color("LightGray"), colorCell: .gray)
-    ]
+
+    @State var Tasks: [Task]
     
+    init() {
+        Tasks = [
+            Task(id: 0, title: "Urgent", image: "exclamationmark", remaining: "0", taskType: "Urgent", colorIcon: Color("LightRed"), colorCell: .red),
+            Task(id: 1, title: "Work", image: "bag.fill", remaining: "0", taskType: "Work", colorIcon: Color("LightBlue"), colorCell: .blue),
+            Task(id: 2, title: "Groceries", image: "cart", remaining: "0", taskType: "Groceries", colorIcon: Color("LightGreen"), colorCell: .green),
+            Task(id: 3, title: "Miscellaneous", image: "pencil", remaining: "0", taskType: "Miscellaneous", colorIcon: Color("LightGray"), colorCell: .gray)
+        ]
+    }
+ 
     var body: some View {
+        
         ZStack{
             //MARK: - Putting Banner on Top
             VStack{
@@ -64,25 +70,34 @@ struct ToDoPage: View {
                 VStack {
                     ScrollView{
                         LazyVGrid(columns: columns, spacing: 20){
-                            ForEach(Tasks, id: \.self){ Task in
-                                TaskView(task: Task)
+                            ForEach(Tasks, id: \.id){ Task in
+                                TaskView( task: Task)
                             }
                             .animation(Animation.easeIn.delay(0.3))
                         }
                         .padding()
                     }
                     .padding()
-                    
                 }
             }
 
-        }.onAppear{
+        }
+        .onAppear{
             //Running Date Call
             self.dateFormatterTool()
+            Tasks = [
+                Task(id: 0, title: "Urgent", image: "exclamationmark", remaining: "\(viewModelGlobal.taskRemainingUrgent)", taskType: "Urgent", colorIcon: Color("LightRed"), colorCell: .red),
+                Task(id: 1, title: "Work", image: "bag.fill", remaining: "0", taskType: "Work", colorIcon: Color("LightBlue"), colorCell: .blue),
+                Task(id: 2, title: "Groceries", image: "cart", remaining: "0", taskType: "Groceries", colorIcon: Color("LightGreen"), colorCell: .green),
+                Task(id: 3, title: "Miscellaneous", image: "pencil", remaining: "0", taskType: "Miscellaneous", colorIcon: Color("LightGray"), colorCell: .gray)
+            ]
+            //print("On Home Screen")
+            //print(env.taskRemainingUrgent)
         }
         .navigationTitle("Home")
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
+        .environmentObject(viewModelGlobal)
     }
     //MARK:- Date Management
     func dateFormatterTool(){
@@ -91,14 +106,16 @@ struct ToDoPage: View {
         dateFormatter.dateFormat = "dd MMMM, hh:mm a"
         dateAndTime = dateFormatter.string(from: currentDate)
     }
+
 }
 //MARK:- How Each Task Looks
 struct TaskView: View {
+    @EnvironmentObject var viewModelGlobal: GlobalEnvironment
     let task: Task
     
     var body: some View{
         NavigationLink(
-            destination: IndividualTaskView(taskType: task.taskType, tasksLeft: task.remaining),
+            destination: IndividualTaskView(taskType: task.taskType, tasksLeft: task.remaining).environmentObject(viewModelGlobal),
             label: {
                 VStack{
                     Image(systemName: task.image)
@@ -118,7 +135,7 @@ struct TaskView: View {
                             .lineLimit(1)
                             .allowsTightening(true)
                         
-                        Text("Remainging Tasks: " + task.remaining)
+                        Text("Remaining Tasks: " + task.remaining)
                             .font(.caption)
                             .foregroundColor(.black)
                     }
@@ -143,7 +160,7 @@ struct TaskView_Previews: PreviewProvider{
 struct ToDoPage_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ToDoPage()
+            ToDoPage().environmentObject(GlobalEnvironment())
                 .previewDevice("iPhone 12 Pro Max")
         }
         

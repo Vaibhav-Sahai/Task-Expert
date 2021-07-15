@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		800EB66726A07BFE0082309C /* GlobalEnvObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800EB66626A07BFE0082309C /* GlobalEnvObject.swift */; };
 		8018C0062694A00D007FBF7F /* TaskAddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018C0052694A00D007FBF7F /* TaskAddScreen.swift */; };
 		8062153B262C449200F68138 /* List_ExpertApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062153A262C449200F68138 /* List_ExpertApp.swift */; };
 		8062153D262C449200F68138 /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062153C262C449200F68138 /* WelcomePage.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		800EB66626A07BFE0082309C /* GlobalEnvObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalEnvObject.swift; sourceTree = "<group>"; };
 		8018C0052694A00D007FBF7F /* TaskAddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddScreen.swift; sourceTree = "<group>"; };
 		80621537262C449200F68138 /* List Expert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "List Expert.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8062153A262C449200F68138 /* List_ExpertApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List_ExpertApp.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				8094AE0A262C6B68000DA689 /* ToDoPage.swift */,
 				807E8B17268A0C7D003DC009 /* IndividualTaskView.swift */,
 				8018C0052694A00D007FBF7F /* TaskAddScreen.swift */,
+				800EB66626A07BFE0082309C /* GlobalEnvObject.swift */,
 				8062153E262C449300F68138 /* Assets.xcassets */,
 				80621543262C449300F68138 /* Info.plist */,
 				80621540262C449300F68138 /* Preview Content */,
@@ -150,6 +153,7 @@
 				8062153D262C449200F68138 /* WelcomePage.swift in Sources */,
 				8094AE0B262C6B68000DA689 /* ToDoPage.swift in Sources */,
 				8018C0062694A00D007FBF7F /* TaskAddScreen.swift in Sources */,
+				800EB66726A07BFE0082309C /* GlobalEnvObject.swift in Sources */,
 				8062153B262C449200F68138 /* List_ExpertApp.swift in Sources */,
 				807E8B18268A0C7D003DC009 /* IndividualTaskView.swift in Sources */,
 			);

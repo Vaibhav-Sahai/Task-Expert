@@ -22,18 +22,23 @@ struct UserDefaultKeys {
 }
 
 struct IndividualTaskView: View {
+    //MARK:- Global Environment
+    @EnvironmentObject var viewModelGlobal: GlobalEnvironment
+    
     var columns: [GridItem] =
         Array(repeating: .init(.flexible(maximum: 160), spacing: 30, alignment: .center), count: 2)
     
     //MARK:- Diffferent Arrays
+    /*
     @State var individualTasksUrgent:[individualTask] = [
         //individualTask(title: "Urgernt Task Screen", color1: "TaskRed1", color2: "TaskRed2")
     ]{
         didSet {
             saveItems()
+            figureRemainingTasks()
         }
     }
-    
+    */
     @State var individualTasksWork:[individualTask] = [
         //individualTask(title: "Work Task Screen", color1: "TaskBlue1", color2: "TaskBlue2")
     ]{
@@ -85,8 +90,7 @@ struct IndividualTaskView: View {
                         .lineLimit(1)
                         .allowsTightening(true)
                 }
-                    
-                Text("\(tasksLeft) Tasks")
+                Text("\(viewModelGlobal.taskRemainingUrgent) Tasks")
                     .font(.title3)
                     .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
                     .minimumScaleFactor(0.25)
@@ -100,7 +104,7 @@ struct IndividualTaskView: View {
                         LazyVGrid(columns: columns, spacing: 20){
                             //Checking what task type
                             if taskType.lowercased() == "urgent"{
-                                ForEach(individualTasksUrgent, id: \.self){
+                                ForEach(viewModelGlobal.individualTasksUrgent, id: \.self){
                                     Task in TaskCellView(task: Task)
                                 }
                             }
@@ -147,7 +151,7 @@ struct IndividualTaskView: View {
                         TaskAddScreen(presentViewModal: $presentViewModal, addTask: {
                             taskAdded in
                             if taskType.lowercased() == "urgent"{
-                                individualTasksUrgent.append(taskAdded)
+                                viewModelGlobal.addItem(item: taskAdded)
                             }
                             if taskType.lowercased() == "work"{
                                 individualTasksWork.append(taskAdded)
@@ -171,15 +175,25 @@ struct IndividualTaskView: View {
         .offset(x:0 , y: -60)
         .onAppear{
             getItems()
+            //print("On Task View Screen")
+            //print(env.taskRemainingUrgent)
+            //env.figureRemaining()
             //FOR DEV USE ONLY
             //resetDefaults()
         }
+        .onDisappear{
+        }
     }
+    //MARK:- Taking Care of Global Env
+    func figureRemainingTasks(){
+        //env.taskRemainingUrgent = individualTasksUrgent.count
+    }
+    
     //MARK:- Save All Arrays
     func saveItems(){
-        if let encodedDataUrgent = try? JSONEncoder().encode(individualTasksUrgent){
-            UserDefaults.standard.set(encodedDataUrgent, forKey: UserDefaultKeys.SavedIndividualTasksUrgent)
-        }
+        //if let encodedDataUrgent = try? JSONEncoder().encode(individualTasksUrgent){
+            //UserDefaults.standard.set(encodedDataUrgent, forKey: UserDefaultKeys.SavedIndividualTasksUrgent)
+        //}
         if let encodedDataWork = try? JSONEncoder().encode(individualTasksWork){
             UserDefaults.standard.set(encodedDataWork, forKey: UserDefaultKeys.SavedIndividualTasksWork)
         }
@@ -195,8 +209,8 @@ struct IndividualTaskView: View {
     func getItems(){
         //Decoding
         guard
-            let urgentTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksUrgent),
-            let SavedUrgentTaskData = try? JSONDecoder().decode([individualTask].self, from: urgentTaskData),
+            //let urgentTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksUrgent),
+            //let SavedUrgentTaskData = try? JSONDecoder().decode([individualTask].self, from: urgentTaskData),
             
             let workTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksWork),
             let SavedWorkTaskData = try? JSONDecoder().decode([individualTask].self, from: workTaskData),
@@ -208,7 +222,7 @@ struct IndividualTaskView: View {
             let SavedMiscellaneousTaskData = try? JSONDecoder().decode([individualTask].self, from: miscellaneousTaskData)
             
         else { return }
-        self.individualTasksUrgent = SavedUrgentTaskData
+        //self.individualTasksUrgent = SavedUrgentTaskData
         self.individualTasksWork = SavedWorkTaskData
         self.individualTasksGroceries = SavedGroceriesTaskData
         self.individualTasksMiscellaneous = SavedMiscellaneousTaskData
@@ -284,7 +298,7 @@ struct TaskCellView_Previews: PreviewProvider{
 struct IndividualTaskView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            IndividualTaskView(taskType: "", tasksLeft: "")
+            IndividualTaskView(taskType: "", tasksLeft: "").environmentObject(GlobalEnvironment())
                 .previewDevice("iPhone 12 Pro Max")
         }
     }

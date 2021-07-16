@@ -143,16 +143,16 @@ struct IndividualTaskView: View {
                         TaskAddScreen(presentViewModal: $presentViewModal, addTask: {
                             taskAdded in
                             if taskType.lowercased() == "urgent"{
-                                viewModelGlobal.addItem(item: taskAdded, taskType: taskType)
+                                viewModelGlobal.addItemToTaskArray(item: taskAdded, taskType: taskType)
                             }
                             if taskType.lowercased() == "work"{
-                                viewModelGlobal.addItem(item: taskAdded, taskType: taskType)
+                                viewModelGlobal.addItemToTaskArray(item: taskAdded, taskType: taskType)
                             }
                             if taskType.lowercased() == "groceries"{
-                                viewModelGlobal.addItem(item: taskAdded, taskType: taskType)
+                                viewModelGlobal.addItemToTaskArray(item: taskAdded, taskType: taskType)
                             }
                             if taskType.lowercased() == "miscellaneous"{
-                                viewModelGlobal.addItem(item: taskAdded, taskType: taskType)
+                                viewModelGlobal.addItemToTaskArray(item: taskAdded, taskType: taskType)
                             }
                         }, taskType: taskType)
                     })

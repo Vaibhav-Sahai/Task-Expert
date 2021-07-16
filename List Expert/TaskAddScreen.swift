@@ -16,6 +16,9 @@ struct Keys{
 }
 
 struct TaskAddScreen: View {
+    //MARK:- Passing The Environment
+    @EnvironmentObject var viewModelGlobal: GlobalEnvironment
+    
     //MARK:- Data To Be Recieved And Passed
     @Binding var presentViewModal: Bool
     var addTask: (individualTask) -> ()
@@ -29,28 +32,6 @@ struct TaskAddScreen: View {
     @State var color2: String = "TaskRed2"
     
     let taskType: String
-    
-    //MARK:- Array Of Task Tittles Passed
-    @State var taskTittlesUrgent: [String] = []{
-        didSet{
-            saveData()
-        }
-    }
-    @State var taskTittlesWork: [String] = []{
-        didSet{
-            saveData()
-        }
-    }
-    @State var taskTittlesGroceries: [String] = []{
-        didSet{
-            saveData()
-        }
-    }
-    @State var taskTittlesMiscellaneous: [String] = []{
-        didSet{
-            saveData()
-        }
-    }
     
     var body: some View {
         VStack {
@@ -105,18 +86,7 @@ struct TaskAddScreen: View {
                             errorMessage = "Error: Task Has Already Been Entered In \(taskType) Tasks"
                             showError = true
                         }else{
-                            if taskType.lowercased() == "urgent"{
-                                taskTittlesUrgent.append(taskBody)
-                            }
-                            else if taskType.lowercased() == "work"{
-                                taskTittlesWork.append(taskBody)
-                            }
-                            else if taskType.lowercased() == "groceries"{
-                                taskTittlesGroceries.append(taskBody)
-                            }
-                            else{
-                                taskTittlesMiscellaneous.append(taskBody)
-                            }
+                            viewModelGlobal.addItemToTaskTitleArray(item: taskBody, taskType: taskType)
                             self.presentViewModal = false
                             colorChooser()
                             addTask(.init(title: taskBody, color1: color1, color2: color2))
@@ -149,7 +119,7 @@ struct TaskAddScreen: View {
             
         }
         .onAppear{
-            getData()
+            
         }
     }
     //MARK:- Choose Color
@@ -173,16 +143,16 @@ struct TaskAddScreen: View {
     }
     //MARK:- Checking TaskBody Text
     func isTaskInVgrid() -> Bool{
-        if taskType.lowercased() == "urgent" && taskTittlesUrgent.contains(taskBody){
+        if taskType.lowercased() == "urgent" && viewModelGlobal.taskTittlesUrgent.contains(taskBody){
             return true
         }
-        else if taskType.lowercased() == "work" && taskTittlesWork.contains(taskBody){
+        else if taskType.lowercased() == "work" && viewModelGlobal.taskTittlesWork.contains(taskBody){
             return true
         }
-        else if taskType.lowercased() == "groceries" && taskTittlesGroceries.contains(taskBody){
+        else if taskType.lowercased() == "groceries" && viewModelGlobal.taskTittlesGroceries.contains(taskBody){
             return true
         }
-        else if taskType.lowercased() == "miscellaneous" && taskTittlesMiscellaneous.contains(taskBody){
+        else if taskType.lowercased() == "miscellaneous" && viewModelGlobal.taskTittlesMiscellaneous.contains(taskBody){
             return true
         }
         else{
@@ -197,29 +167,6 @@ struct TaskAddScreen: View {
         } else{
             return false
         }
-    }
-    
-    //MARK:- Saving Data
-    func saveData(){
-        UserDefaults.standard.set(taskTittlesUrgent, forKey: Keys.urgentTittles)
-        UserDefaults.standard.set(taskTittlesWork, forKey: Keys.workTittles)
-        UserDefaults.standard.set(taskTittlesGroceries, forKey: Keys.groceriesTittles)
-        UserDefaults.standard.set(taskTittlesMiscellaneous, forKey: Keys.miscellaneousTittles)
-    }
-    
-    //MARK:- Loading Data
-    func getData(){
-        guard
-            let savedUrgentTittles = UserDefaults.standard.stringArray(forKey: Keys.urgentTittles),
-            let savedWorkTittles = UserDefaults.standard.stringArray(forKey: Keys.workTittles),
-            let savedGroceriesTittles = UserDefaults.standard.stringArray(forKey: Keys.groceriesTittles),
-            let savedMiscellaneousTittles = UserDefaults.standard.stringArray(forKey: Keys.miscellaneousTittles)
-        else { return }
-        
-        self.taskTittlesUrgent = savedUrgentTittles
-        self.taskTittlesWork = savedWorkTittles
-        self.taskTittlesGroceries = savedGroceriesTittles
-        self.taskTittlesMiscellaneous = savedMiscellaneousTittles
     }
     
 }

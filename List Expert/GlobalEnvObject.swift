@@ -19,34 +19,57 @@ class GlobalEnvironment: ObservableObject{
     //MARK:- Individual Arrays
     @Published var individualTasksUrgent:[individualTask] = []{
         didSet{
-            saveItems()
+            saveTasksArray()
             figureRemaining()
         }
     }
     @Published var individualTasksWork:[individualTask] = []{
         didSet{
-            saveItems()
+            saveTasksArray()
             figureRemaining()
         }
     }
     @Published var individualTasksGroceries:[individualTask] = []{
         didSet{
-            saveItems()
+            saveTasksArray()
             figureRemaining()
         }
     }
     
     @Published var individualTasksMiscellaneous:[individualTask] = []{
         didSet{
-            saveItems()
+            saveTasksArray()
             figureRemaining()
+        }
+    }
+    
+    //MARK:- Array Of Task Tittles Passed
+    @Published var taskTittlesUrgent: [String] = []{
+        didSet{
+            saveTaskTitleArray()
+        }
+    }
+    @Published var taskTittlesWork: [String] = []{
+        didSet{
+            saveTaskTitleArray()
+        }
+    }
+    @Published var taskTittlesGroceries: [String] = []{
+        didSet{
+            saveTaskTitleArray()
+        }
+    }
+    @Published var taskTittlesMiscellaneous: [String] = []{
+        didSet{
+            saveTaskTitleArray()
         }
     }
     
     init() {
         //Dev Use ONLY
         //resetDefaults()
-        getItems()
+        getTasksArray()
+        getTaskTitleArray()
         figureRemaining()
     }
     //MARK:- Take Care of Labelling
@@ -59,7 +82,7 @@ class GlobalEnvironment: ObservableObject{
     }
     
     //MARK:- Append Lists
-    func addItem(item: individualTask, taskType: String){
+    func addItemToTaskArray(item: individualTask, taskType: String){
         if taskType.lowercased() == "urgent"{
             self.individualTasksUrgent.append(item)
         }
@@ -74,8 +97,24 @@ class GlobalEnvironment: ObservableObject{
         }
        
     }
+    
+    func addItemToTaskTitleArray(item: String, taskType: String){
+        if taskType.lowercased() == "urgent"{
+            self.taskTittlesUrgent.append(item)
+        }
+        else if taskType.lowercased() == "work"{
+            self.taskTittlesWork.append(item)
+        }
+        else if taskType.lowercased() == "groceries"{
+            self.taskTittlesGroceries.append(item)
+        }
+        else if taskType.lowercased() == "miscellaneous"{
+            self.taskTittlesMiscellaneous.append(item)
+        }
+       
+    }
     //MARK:- Save Items
-    func saveItems(){
+    func saveTasksArray(){
         if let encodedDataUrgent = try? JSONEncoder().encode(individualTasksUrgent){
             UserDefaults.standard.set(encodedDataUrgent, forKey: UserDefaultKeys.SavedIndividualTasksUrgent)
         }
@@ -89,8 +128,16 @@ class GlobalEnvironment: ObservableObject{
             UserDefaults.standard.set(encodedDataMiscellaneous, forKey: UserDefaultKeys.SavedIndividualTasksMiscellaneous)
         }
     }
+    
+    func saveTaskTitleArray(){
+        UserDefaults.standard.set(taskTittlesUrgent, forKey: Keys.urgentTittles)
+        UserDefaults.standard.set(taskTittlesWork, forKey: Keys.workTittles)
+        UserDefaults.standard.set(taskTittlesGroceries, forKey: Keys.groceriesTittles)
+        UserDefaults.standard.set(taskTittlesMiscellaneous, forKey: Keys.miscellaneousTittles)
+    }
+    
     //MARK:- Get Items
-    func getItems(){
+    func getTasksArray(){
         //Decoding
         guard
             let urgentTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksUrgent),
@@ -110,6 +157,20 @@ class GlobalEnvironment: ObservableObject{
         self.individualTasksWork = SavedWorkTaskData
         self.individualTasksGroceries = SavedGroceriesTaskData
         self.individualTasksMiscellaneous = SavedMiscellaneousTaskData
+    }
+    
+    func getTaskTitleArray(){
+        guard
+            let savedUrgentTittles = UserDefaults.standard.stringArray(forKey: Keys.urgentTittles),
+            let savedWorkTittles = UserDefaults.standard.stringArray(forKey: Keys.workTittles),
+            let savedGroceriesTittles = UserDefaults.standard.stringArray(forKey: Keys.groceriesTittles),
+            let savedMiscellaneousTittles = UserDefaults.standard.stringArray(forKey: Keys.miscellaneousTittles)
+        else { return }
+        
+        self.taskTittlesUrgent = savedUrgentTittles
+        self.taskTittlesWork = savedWorkTittles
+        self.taskTittlesGroceries = savedGroceriesTittles
+        self.taskTittlesMiscellaneous = savedMiscellaneousTittles
     }
     //MARK:- Reset UserDefaults
     func resetDefaults() {

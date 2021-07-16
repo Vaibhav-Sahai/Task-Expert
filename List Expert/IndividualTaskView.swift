@@ -121,6 +121,8 @@ struct IndividualTaskView: View {
                     }
                     .ignoresSafeArea(.container, edges: .bottom)
                     //.offset(x: 0, y: 40)
+                    //Offset to Fix VGrid
+                    .offset(x: 0, y: 20)
                 }
                 .offset(x: 0, y: 40)
 
@@ -142,18 +144,8 @@ struct IndividualTaskView: View {
                     }).sheet(isPresented: $presentViewModal, content: {
                         TaskAddScreen(presentViewModal: $presentViewModal, addTask: {
                             taskAdded in
-                            if taskType.lowercased() == "urgent"{
-                                viewModelGlobal.addItemToTaskArray(item: taskAdded, taskType: taskType)
-                            }
-                            if taskType.lowercased() == "work"{
-                                viewModelGlobal.addItemToTaskArray(item: taskAdded, taskType: taskType)
-                            }
-                            if taskType.lowercased() == "groceries"{
-                                viewModelGlobal.addItemToTaskArray(item: taskAdded, taskType: taskType)
-                            }
-                            if taskType.lowercased() == "miscellaneous"{
-                                viewModelGlobal.addItemToTaskArray(item: taskAdded, taskType: taskType)
-                            }
+                            viewModelGlobal.addItemToTaskArray(item: taskAdded, taskType: taskType)
+                            
                         }, taskType: taskType)
                     })
                     
@@ -242,7 +234,7 @@ struct TaskCellView_Previews: PreviewProvider{
 struct IndividualTaskView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            IndividualTaskView(taskType: "", tasksLeft: "").environmentObject(GlobalEnvironment())
+            IndividualTaskView(taskType: "Urgent", tasksLeft: "0").environmentObject(GlobalEnvironment())
                 .previewDevice("iPhone 12 Pro Max")
         }
     }

@@ -45,49 +45,10 @@ struct IndividualTaskView: View {
                     .frame(width: 500 ,height: 100)
                 Spacer()
             }
+           
             //MARK:- Task Type and Tasks Remainging
             VStack {
-                HStack {
-                    Text(taskType)
-                        .font(.largeTitle).bold()
-                        .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
-                        .minimumScaleFactor(0.25)
-                        .lineLimit(1)
-                        .allowsTightening(true)
-                }
-                if taskType.lowercased() == "urgent"{
-                    Text("\(viewModelGlobal.taskRemainingUrgent) Tasks")
-                        .font(.title3)
-                        .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                        .minimumScaleFactor(0.25)
-                        .lineLimit(1)
-                        .allowsTightening(true)
-                }
-                else if taskType.lowercased() == "work"{
-                    Text("\(viewModelGlobal.taskRemainingWork) Tasks")
-                        .font(.title3)
-                        .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                        .minimumScaleFactor(0.25)
-                        .lineLimit(1)
-                        .allowsTightening(true)
-                }
-                else if taskType.lowercased() == "groceries"{
-                    Text("\(viewModelGlobal.taskRemainingGroceries) Tasks")
-                        .font(.title3)
-                        .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                        .minimumScaleFactor(0.25)
-                        .lineLimit(1)
-                        .allowsTightening(true)
-                }
-                else if taskType.lowercased() == "miscellaneous"{
-                    Text("\(viewModelGlobal.taskRemainingMiscellaneous) Tasks")
-                        .font(.title3)
-                        .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
-                        .minimumScaleFactor(0.25)
-                        .lineLimit(1)
-                        .allowsTightening(true)
-                }
-                
+                HeaderView(taskType: taskType)
                 Spacer()
                 //MARK:- LazyVGrid Here
                 VStack{
@@ -97,27 +58,28 @@ struct IndividualTaskView: View {
                             //Checking what task type
                             if taskType.lowercased() == "urgent"{
                                 ForEach(viewModelGlobal.individualTasksUrgent, id: \.self){
-                                    Task in TaskCellView(task: Task)
+                                    Task in TaskCellView(task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "work"{
                                 ForEach(viewModelGlobal.individualTasksWork, id: \.self){
-                                    Task in TaskCellView(task: Task)
+                                    Task in TaskCellView(task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "groceries"{
                                 ForEach(viewModelGlobal.individualTasksGroceries, id: \.self){
-                                    Task in TaskCellView(task: Task)
+                                    Task in TaskCellView(task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "miscellaneous"{
                                 ForEach(viewModelGlobal.individualTasksMiscellaneous, id: \.self){
-                                    Task in TaskCellView(task: Task)
+                                    Task in TaskCellView(task: Task, taskType: taskType)
                                 }
                             }
                         }
                         .padding()
                         .ignoresSafeArea(.container, edges: .bottom)
+                        .animation(Animation.spring().delay(0))
                     }
                     .ignoresSafeArea(.container, edges: .bottom)
                     //.offset(x: 0, y: 40)
@@ -127,7 +89,6 @@ struct IndividualTaskView: View {
                 .offset(x: 0, y: 40)
 
             }
-           
             //MARK:- Present Task Add Screen
             VStack {
                 Spacer()
@@ -172,12 +133,61 @@ struct IndividualTaskView: View {
             defaults.removeObject(forKey: key)
         }
     }
-}
 
+//MARK:- Header View
+    
+struct HeaderView: View {
+    @EnvironmentObject var viewModelGlobal: GlobalEnvironment
+    let taskType: String
+    var body: some View{
+        HStack {
+            Text(taskType)
+                .font(.largeTitle).bold()
+                .foregroundColor(Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)))
+                .minimumScaleFactor(0.25)
+                .lineLimit(1)
+                .allowsTightening(true)
+        }
+        if taskType.lowercased() == "urgent"{
+            Text("\(viewModelGlobal.taskRemainingUrgent) Tasks")
+                .font(.title3)
+                .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                .minimumScaleFactor(0.25)
+                .lineLimit(1)
+                .allowsTightening(true)
+        }
+        else if taskType.lowercased() == "work"{
+            Text("\(viewModelGlobal.taskRemainingWork) Tasks")
+                .font(.title3)
+                .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                .minimumScaleFactor(0.25)
+                .lineLimit(1)
+                .allowsTightening(true)
+        }
+        else if taskType.lowercased() == "groceries"{
+            Text("\(viewModelGlobal.taskRemainingGroceries) Tasks")
+                .font(.title3)
+                .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                .minimumScaleFactor(0.25)
+                .lineLimit(1)
+                .allowsTightening(true)
+        }
+        else if taskType.lowercased() == "miscellaneous"{
+            Text("\(viewModelGlobal.taskRemainingMiscellaneous) Tasks")
+                .font(.title3)
+                .foregroundColor(Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)))
+                .minimumScaleFactor(0.25)
+                .lineLimit(1)
+                .allowsTightening(true)
+        }
+    }
+}
 //MARK:- Individual Task Cell View
 
 struct TaskCellView: View {
+    @EnvironmentObject var viewModelGlobal: GlobalEnvironment
     let task: individualTask
+    let taskType: String
     var body: some View {
         VStack {
             Spacer()
@@ -194,6 +204,7 @@ struct TaskCellView: View {
                 Spacer()
                 Button{
                     //Action: Task complete
+                    viewModelGlobal.removeItemFromTaskArray(item: task, taskType: taskType)
                 } label: {
                     Image(systemName: "checkmark.circle.fill")
                         .resizable()
@@ -238,4 +249,5 @@ struct IndividualTaskView_Previews: PreviewProvider {
                 .previewDevice("iPhone 12 Pro Max")
         }
     }
+}
 }

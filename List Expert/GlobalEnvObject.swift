@@ -113,19 +113,49 @@ class GlobalEnvironment: ObservableObject{
         }
        
     }
+    
+    //MARK:- Remove Item From List
+    
+    func removeItemFromTaskArray(item: individualTask, taskType: String){
+        if taskType.lowercased() == "urgent"{
+            if let index = individualTasksUrgent.firstIndex(of: item) {
+                individualTasksUrgent.remove(at: index)
+                //saveTasksArray()
+            }
+        }
+        else if taskType.lowercased() == "work"{
+            if let index = individualTasksWork.firstIndex(of: item) {
+                individualTasksWork.remove(at: index)
+                //saveTasksArray()
+            }
+        }
+        else if taskType.lowercased() == "groceries"{
+            if let index = individualTasksGroceries.firstIndex(of: item) {
+                individualTasksGroceries.remove(at: index)
+                //saveTasksArray()
+            }
+        }
+        else if taskType.lowercased() == "miscellaneous"{
+            if let index = individualTasksMiscellaneous.firstIndex(of: item) {
+                individualTasksMiscellaneous.remove(at: index)
+                //saveTasksArray()
+            }
+        }
+    }
+    
     //MARK:- Save Items
     func saveTasksArray(){
-        if let encodedDataUrgent = try? JSONEncoder().encode(individualTasksUrgent){
-            UserDefaults.standard.set(encodedDataUrgent, forKey: UserDefaultKeys.SavedIndividualTasksUrgent)
+        if let encodedUrgentArray = try? JSONEncoder().encode(individualTasksUrgent){
+            UserDefaults.standard.set(encodedUrgentArray, forKey: UserDefaultKeys.SavedIndividualTasksUrgent)
         }
-        if let encodedDataWork = try? JSONEncoder().encode(individualTasksWork){
-            UserDefaults.standard.set(encodedDataWork, forKey: UserDefaultKeys.SavedIndividualTasksWork)
+        if let encodedWorkArray = try? JSONEncoder().encode(individualTasksWork){
+            UserDefaults.standard.set(encodedWorkArray, forKey: UserDefaultKeys.SavedIndividualTasksWork)
         }
-        if let encodedDataGroceries = try? JSONEncoder().encode(individualTasksGroceries){
-            UserDefaults.standard.set(encodedDataGroceries, forKey: UserDefaultKeys.SavedIndividualTasksGroceries)
+        if let encodedGroceriesArray = try? JSONEncoder().encode(individualTasksGroceries){
+            UserDefaults.standard.set(encodedGroceriesArray, forKey: UserDefaultKeys.SavedIndividualTasksGroceries)
         }
-        if let encodedDataMiscellaneous = try? JSONEncoder().encode(individualTasksMiscellaneous){
-            UserDefaults.standard.set(encodedDataMiscellaneous, forKey: UserDefaultKeys.SavedIndividualTasksMiscellaneous)
+        if let encodedMiscellaneousArray =  try? JSONEncoder().encode(individualTasksMiscellaneous){
+            UserDefaults.standard.set(encodedMiscellaneousArray, forKey: UserDefaultKeys.SavedIndividualTasksMiscellaneous)
         }
     }
     
@@ -138,25 +168,23 @@ class GlobalEnvironment: ObservableObject{
     
     //MARK:- Get Items
     func getTasksArray(){
-        //Decoding
         guard
-            let urgentTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksUrgent),
-            let SavedUrgentTaskData = try? JSONDecoder().decode([individualTask].self, from: urgentTaskData),
+            let dataUrgent = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksUrgent),
+            let savedUrgent = try? JSONDecoder().decode([individualTask].self, from: dataUrgent),
             
-            let workTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksWork),
-            let SavedWorkTaskData = try? JSONDecoder().decode([individualTask].self, from: workTaskData),
+            let dataWork = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksWork),
+            let savedWork = try? JSONDecoder().decode([individualTask].self, from: dataWork),
             
-            let groceriesTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksGroceries),
-            let SavedGroceriesTaskData = try? JSONDecoder().decode([individualTask].self, from: groceriesTaskData),
+            let dataGroceries = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksGroceries),
+            let savedGroceries = try? JSONDecoder().decode([individualTask].self, from: dataGroceries),
             
-            let miscellaneousTaskData = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksMiscellaneous),
-            let SavedMiscellaneousTaskData = try? JSONDecoder().decode([individualTask].self, from: miscellaneousTaskData)
+            let dataMiscellaneous = UserDefaults.standard.data(forKey: UserDefaultKeys.SavedIndividualTasksMiscellaneous),
+            let savedMiscellaneous = try? JSONDecoder().decode([individualTask].self, from: dataMiscellaneous)
         else { return }
-        
-        self.individualTasksUrgent = SavedUrgentTaskData
-        self.individualTasksWork = SavedWorkTaskData
-        self.individualTasksGroceries = SavedGroceriesTaskData
-        self.individualTasksMiscellaneous = SavedMiscellaneousTaskData
+        self.individualTasksUrgent = savedUrgent
+        self.individualTasksWork = savedWork
+        self.individualTasksGroceries = savedGroceries
+        self.individualTasksMiscellaneous = savedMiscellaneous
     }
     
     func getTaskTitleArray(){

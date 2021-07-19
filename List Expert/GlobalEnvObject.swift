@@ -120,25 +120,44 @@ class GlobalEnvironment: ObservableObject{
         if taskType.lowercased() == "urgent"{
             if let index = individualTasksUrgent.firstIndex(of: item) {
                 individualTasksUrgent.remove(at: index)
-                //saveTasksArray()
             }
         }
         else if taskType.lowercased() == "work"{
             if let index = individualTasksWork.firstIndex(of: item) {
                 individualTasksWork.remove(at: index)
-                //saveTasksArray()
             }
         }
         else if taskType.lowercased() == "groceries"{
             if let index = individualTasksGroceries.firstIndex(of: item) {
                 individualTasksGroceries.remove(at: index)
-                //saveTasksArray()
             }
         }
         else if taskType.lowercased() == "miscellaneous"{
             if let index = individualTasksMiscellaneous.firstIndex(of: item) {
                 individualTasksMiscellaneous.remove(at: index)
-                //saveTasksArray()
+            }
+        }
+    }
+    
+    func removeItemFromTaskTitleArray(item: String, taskType: String){
+        if taskType.lowercased() == "urgent"{
+            if let index = taskTittlesUrgent.firstIndex(of: item) {
+                taskTittlesUrgent.remove(at: index)
+            }
+        }
+        else if taskType.lowercased() == "work"{
+            if let index = taskTittlesWork.firstIndex(of: item) {
+                taskTittlesWork.remove(at: index)
+            }
+        }
+        else if taskType.lowercased() == "groceries"{
+            if let index = taskTittlesGroceries.firstIndex(of: item) {
+                taskTittlesGroceries.remove(at: index)
+            }
+        }
+        else if taskType.lowercased() == "miscellaneous"{
+            if let index = taskTittlesMiscellaneous.firstIndex(of: item) {
+                taskTittlesMiscellaneous.remove(at: index)
             }
         }
     }

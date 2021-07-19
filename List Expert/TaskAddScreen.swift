@@ -45,8 +45,7 @@ struct TaskAddScreen: View {
             Form{
                 Section(header: Text("New Task Information")) {
                     if tappedTaskBody == false{
-                        TextField("Task Body", text: $taskBody )
-                            .foregroundColor(.gray)
+                        TextField("Task Body", text: $taskBody)
                         
                     }else{
                         TextField("Task Body", text: $taskBody )

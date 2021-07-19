@@ -24,7 +24,6 @@ struct UserDefaultKeys {
 struct IndividualTaskView: View {
     //MARK:- Global Environment
     @EnvironmentObject var viewModelGlobal: GlobalEnvironment
-    
     var columns: [GridItem] =
         Array(repeating: .init(.flexible(maximum: 160), spacing: 30, alignment: .center), count: 2)
     
@@ -186,6 +185,8 @@ struct HeaderView: View {
 
 struct TaskCellView: View {
     @EnvironmentObject var viewModelGlobal: GlobalEnvironment
+    @State var showAlertYes: Bool = false
+    @State var showAlertNo: Bool = false
     let task: individualTask
     let taskType: String
     var body: some View {
@@ -204,22 +205,37 @@ struct TaskCellView: View {
                 Spacer()
                 Button{
                     //Action: Task complete
-                    viewModelGlobal.removeItemFromTaskArray(item: task, taskType: taskType)
+                    self.showAlertYes = true
                 } label: {
                     Image(systemName: "checkmark.circle.fill")
                         .resizable()
                         .foregroundColor(Color(#colorLiteral(red: 0.2897821802, green: 0.7647058964, blue: 0, alpha: 1)))
                         .frame(width: 30, height: 30)
                 }
+                //MARK:- Confirm Yes View
+                .alert(isPresented: $showAlertYes, content: {
+                    Alert(title: Text("Have You Completed This Task?"), message: Text("'\(task.title)' Is The Highlighted Task"),primaryButton: .default(Text("Yes"), action: {
+                        viewModelGlobal.removeItemFromTaskArray(item: task, taskType: taskType)
+                        viewModelGlobal.removeItemFromTaskTitleArray(item: task.title, taskType: taskType)
+                    }), secondaryButton: .cancel(Text("No")))
+                })
                 Spacer()
                 Button{
                     //Action: Task discard
+                    self.showAlertNo = true
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .resizable()
                         .foregroundColor(Color(#colorLiteral(red: 1, green: 0.08644310853, blue: 0.02825784669, alpha: 1)))
                         .frame(width: 30, height: 30)
                 }
+                //MARK:- Confirm No View
+                .alert(isPresented: $showAlertNo, content: {
+                    Alert(title: Text("Would You Like To Forgo This Task?"), message: Text("'\(task.title)' Is The Highlighted Task"), primaryButton: .default(Text("Yes"), action: {
+                        viewModelGlobal.removeItemFromTaskArray(item: task, taskType: taskType)
+                        viewModelGlobal.removeItemFromTaskTitleArray(item: task.title, taskType: taskType)
+                    }), secondaryButton: .cancel(Text("No")))
+                })
                 Spacer()
             }
             Spacer()

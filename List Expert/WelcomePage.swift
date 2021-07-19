@@ -105,7 +105,6 @@ struct ContentView: View {
         alert.addAction(confirmName)
         //Presenting the Alert
         UIApplication.shared.windows.first?.rootViewController?.present(alert, animated: true, completion: {
-            
         })
     }
 }

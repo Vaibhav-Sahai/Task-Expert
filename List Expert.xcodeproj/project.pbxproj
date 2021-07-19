@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,10 @@
 		8062153F262C449300F68138 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8062153E262C449300F68138 /* Assets.xcassets */; };
 		80621542262C449300F68138 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80621541262C449300F68138 /* Preview Assets.xcassets */; };
 		807E8B18268A0C7D003DC009 /* IndividualTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807E8B17268A0C7D003DC009 /* IndividualTaskView.swift */; };
+		808D524E26A59E8200B25EC1 /* TaskCompletedGIF.json in Resources */ = {isa = PBXBuildFile; fileRef = 808D524D26A59E8200B25EC1 /* TaskCompletedGIF.json */; };
+		808D525126A59EE100B25EC1 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 808D525026A59EE100B25EC1 /* Lottie */; };
+		808D525326A59F4700B25EC1 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808D525226A59F4700B25EC1 /* LottieView.swift */; };
+		808D525726A5A21900B25EC1 /* LottieAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808D525626A5A21900B25EC1 /* LottieAnimationType.swift */; };
 		8094AE0B262C6B68000DA689 /* ToDoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8094AE0A262C6B68000DA689 /* ToDoPage.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +32,9 @@
 		80621543262C449300F68138 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		807E8B17268A0C7D003DC009 /* IndividualTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualTaskView.swift; sourceTree = "<group>"; };
 		808D524B26A596B300B25EC1 /* List Expert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "List Expert.entitlements"; sourceTree = "<group>"; };
+		808D524D26A59E8200B25EC1 /* TaskCompletedGIF.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TaskCompletedGIF.json; sourceTree = "<group>"; };
+		808D525226A59F4700B25EC1 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		808D525626A5A21900B25EC1 /* LottieAnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationType.swift; sourceTree = "<group>"; };
 		8094AE0A262C6B68000DA689 /* ToDoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -36,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				808D525126A59EE100B25EC1 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,16 +69,19 @@
 		80621539262C449200F68138 /* List Expert */ = {
 			isa = PBXGroup;
 			children = (
-				808D524B26A596B300B25EC1 /* List Expert.entitlements */,
 				8062153A262C449200F68138 /* List_ExpertApp.swift */,
 				8062153C262C449200F68138 /* WelcomePage.swift */,
 				8094AE0A262C6B68000DA689 /* ToDoPage.swift */,
 				807E8B17268A0C7D003DC009 /* IndividualTaskView.swift */,
 				8018C0052694A00D007FBF7F /* TaskAddScreen.swift */,
 				800EB66626A07BFE0082309C /* GlobalEnvObject.swift */,
+				808D525626A5A21900B25EC1 /* LottieAnimationType.swift */,
+				808D525226A59F4700B25EC1 /* LottieView.swift */,
+				808D524B26A596B300B25EC1 /* List Expert.entitlements */,
 				8062153E262C449300F68138 /* Assets.xcassets */,
 				80621543262C449300F68138 /* Info.plist */,
 				80621540262C449300F68138 /* Preview Content */,
+				808D524C26A59E6A00B25EC1 /* LottieFiles */,
 			);
 			path = "List Expert";
 			sourceTree = "<group>";
@@ -81,6 +92,14 @@
 				80621541262C449300F68138 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		808D524C26A59E6A00B25EC1 /* LottieFiles */ = {
+			isa = PBXGroup;
+			children = (
+				808D524D26A59E8200B25EC1 /* TaskCompletedGIF.json */,
+			);
+			path = LottieFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +118,9 @@
 			dependencies = (
 			);
 			name = "List Expert";
+			packageProductDependencies = (
+				808D525026A59EE100B25EC1 /* Lottie */,
+			);
 			productName = "List Expert";
 			productReference = 80621537262C449200F68138 /* List Expert.app */;
 			productType = "com.apple.product-type.application";
@@ -126,6 +148,9 @@
 				Base,
 			);
 			mainGroup = 8062152E262C449100F68138;
+			packageReferences = (
+				808D524F26A59EE100B25EC1 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 80621538262C449200F68138 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -142,6 +167,7 @@
 			files = (
 				80621542262C449300F68138 /* Preview Assets.xcassets in Resources */,
 				8062153F262C449300F68138 /* Assets.xcassets in Resources */,
+				808D524E26A59E8200B25EC1 /* TaskCompletedGIF.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,9 +179,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8062153D262C449200F68138 /* WelcomePage.swift in Sources */,
+				808D525726A5A21900B25EC1 /* LottieAnimationType.swift in Sources */,
 				8094AE0B262C6B68000DA689 /* ToDoPage.swift in Sources */,
 				8018C0062694A00D007FBF7F /* TaskAddScreen.swift in Sources */,
 				800EB66726A07BFE0082309C /* GlobalEnvObject.swift in Sources */,
+				808D525326A59F4700B25EC1 /* LottieView.swift in Sources */,
 				8062153B262C449200F68138 /* List_ExpertApp.swift in Sources */,
 				807E8B18268A0C7D003DC009 /* IndividualTaskView.swift in Sources */,
 			);
@@ -287,6 +315,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "List Expert/List Expert.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"List Expert/Preview Content\"";
 				DEVELOPMENT_TEAM = WGG5L2MMES;
 				ENABLE_PREVIEWS = YES;
@@ -311,6 +340,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "List Expert/List Expert.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"List Expert/Preview Content\"";
 				DEVELOPMENT_TEAM = WGG5L2MMES;
 				ENABLE_PREVIEWS = YES;
@@ -350,6 +380,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		808D524F26A59EE100B25EC1 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		808D525026A59EE100B25EC1 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 808D524F26A59EE100B25EC1 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8062152F262C449100F68138 /* Project object */;
 }

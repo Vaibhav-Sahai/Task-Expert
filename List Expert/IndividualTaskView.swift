@@ -34,6 +34,9 @@ struct IndividualTaskView: View {
     //MARK:- Properties to pass and recieve from modal view
     @State private var presentViewModal: Bool = false
     
+    //MARK:- Present Lottie Animation
+    @State var presentCongratsView = false
+
     var body: some View {
         //MARK:- Header 
         ZStack {
@@ -53,26 +56,29 @@ struct IndividualTaskView: View {
                 VStack{
                     //Creating the scrollview
                     ScrollView(){
+                        if presentCongratsView{
+                            LottieAnimationType(filename: "TaskCompletedGIF")
+                        }
                         LazyVGrid(columns: columns, spacing: 20){
                             //Checking what task type
                             if taskType.lowercased() == "urgent"{
                                 ForEach(viewModelGlobal.individualTasksUrgent, id: \.self){
-                                    Task in TaskCellView(task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "work"{
                                 ForEach(viewModelGlobal.individualTasksWork, id: \.self){
-                                    Task in TaskCellView(task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "groceries"{
                                 ForEach(viewModelGlobal.individualTasksGroceries, id: \.self){
-                                    Task in TaskCellView(task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "miscellaneous"{
                                 ForEach(viewModelGlobal.individualTasksMiscellaneous, id: \.self){
-                                    Task in TaskCellView(task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, task: Task, taskType: taskType)
                                 }
                             }
                         }
@@ -120,10 +126,7 @@ struct IndividualTaskView: View {
         .onAppear{
             
         }
-        .onDisappear{
-        }
     }
-    
     //MARK:- Clear User Defaults
     func resetDefaults() {
         let defaults = UserDefaults.standard
@@ -137,6 +140,7 @@ struct IndividualTaskView: View {
     
 struct HeaderView: View {
     @EnvironmentObject var viewModelGlobal: GlobalEnvironment
+    
     let taskType: String
     var body: some View{
         HStack {
@@ -187,12 +191,17 @@ struct TaskCellView: View {
     @EnvironmentObject var viewModelGlobal: GlobalEnvironment
     @State var showAlertYes: Bool = false
     @State var showAlertNo: Bool = false
+    
+    //MARK:- Show Lottie Animation
+    @Binding var presentCongratsView: Bool
+    
+
     let task: individualTask
     let taskType: String
     var body: some View {
         VStack {
             Spacer()
-            
+
             Text(task.title)
                 .font(.title3)
                 .foregroundColor(.white)
@@ -206,6 +215,7 @@ struct TaskCellView: View {
                 Button{
                     //Action: Task complete
                     self.showAlertYes = true
+
                 } label: {
                     Image(systemName: "checkmark.circle.fill")
                         .resizable()
@@ -217,6 +227,10 @@ struct TaskCellView: View {
                     Alert(title: Text("Have You Completed This Task?"), message: Text("'\(task.title)' Is The Highlighted Task"),primaryButton: .default(Text("Yes"), action: {
                         viewModelGlobal.removeItemFromTaskArray(item: task, taskType: taskType)
                         viewModelGlobal.removeItemFromTaskTitleArray(item: task.title, taskType: taskType)
+                        presentCongratsView = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                            self.presentCongratsView = false
+                        }
                     }), secondaryButton: .cancel(Text("No")))
                 })
                 Spacer()

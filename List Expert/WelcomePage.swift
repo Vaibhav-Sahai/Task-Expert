@@ -12,7 +12,7 @@ struct ContentView: View {
     //MARK:- Instating Global Env
     @StateObject var viewModelGlobal: GlobalEnvironment = GlobalEnvironment()
     @State private var alertIsPresented = true
-    @State var username = ""
+    @AppStorage("username") var username: String = ""
     @State var show = false
     
     var body: some View {
@@ -41,7 +41,7 @@ struct ContentView: View {
                             .animation(Animation.easeIn.delay(0.1))
                     }
                     
-                    WelcomeTextView(remaining: viewModelGlobal.totalRemaining, tasks: 10) //Does the Welcome Text
+                    WelcomeTextView(remaining: viewModelGlobal.totalRemaining) //Does the Welcome Text
                     Spacer()
                     //Buttons:
                     VStack(spacing: 10){
@@ -120,7 +120,6 @@ struct ContentView_Previews: PreviewProvider {
 //MARK:- Pass Parameter To Number of Task Here
 struct WelcomeTextView: View{
     var remaining: Int
-    var tasks: Int
     var body: some View{
         HStack(spacing: 5){
             Text("You've \(remaining) Tasks Pending!")

@@ -41,7 +41,7 @@ struct IndividualTaskView: View {
                 Image("Banner")
                     .resizable()
                     .ignoresSafeArea()
-                    .frame(width: 500 ,height: 100)
+                    .frame(width: abs(.infinity) ,height: 100)
                 Spacer()
             }
            
@@ -243,7 +243,7 @@ struct TaskCellView: View {
         .frame(width: 180, height: 220, alignment: .center)
         .background(LinearGradient(gradient: Gradient(colors: [Color(task.color1), Color(task.color2)]), startPoint: .top, endPoint: .bottom))
         .cornerRadius(50)
-        .shadow(color: .gray, radius: 10)
+        .shadow(color: .black, radius: 2.5)
     }
 }
 

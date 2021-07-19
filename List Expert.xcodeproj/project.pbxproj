@@ -27,6 +27,7 @@
 		80621541262C449300F68138 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		80621543262C449300F68138 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		807E8B17268A0C7D003DC009 /* IndividualTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualTaskView.swift; sourceTree = "<group>"; };
+		808D524B26A596B300B25EC1 /* List Expert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "List Expert.entitlements"; sourceTree = "<group>"; };
 		8094AE0A262C6B68000DA689 /* ToDoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +61,7 @@
 		80621539262C449200F68138 /* List Expert */ = {
 			isa = PBXGroup;
 			children = (
+				808D524B26A596B300B25EC1 /* List Expert.entitlements */,
 				8062153A262C449200F68138 /* List_ExpertApp.swift */,
 				8062153C262C449200F68138 /* WelcomePage.swift */,
 				8094AE0A262C6B68000DA689 /* ToDoPage.swift */,
@@ -283,6 +285,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "List Expert/List Expert.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"List Expert/Preview Content\"";
 				DEVELOPMENT_TEAM = WGG5L2MMES;
@@ -295,6 +298,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vaibhav.List-Expert";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -305,6 +309,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "List Expert/List Expert.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"List Expert/Preview Content\"";
 				DEVELOPMENT_TEAM = WGG5L2MMES;
@@ -317,6 +322,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vaibhav.List-Expert";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

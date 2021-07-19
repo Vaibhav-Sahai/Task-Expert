@@ -43,7 +43,7 @@ struct ToDoPage: View {
                 Image("Banner")
                     .resizable()
                     .ignoresSafeArea()
-                    .frame(width: 500 ,height: 100)
+                    .frame(width: abs(.infinity) ,height: 100)
                 Spacer()
             }
             //MARK:- Date Time
@@ -143,7 +143,7 @@ struct TaskView: View {
                 .frame(width: 180, height: 180)
                 .background(task.colorCell)
                 .cornerRadius(50)
-                .shadow(color: .gray, radius: 10)
+                .shadow(color: .black, radius: 2.5)
             })
         
     }

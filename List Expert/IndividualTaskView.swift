@@ -36,7 +36,8 @@ struct IndividualTaskView: View {
     
     //MARK:- Present Lottie Animation
     @State var presentCongratsView = false
-
+    @State var presentForgoneView = false
+    
     var body: some View {
         //MARK:- Header 
         ZStack {
@@ -57,28 +58,31 @@ struct IndividualTaskView: View {
                     //Creating the scrollview
                     ScrollView(){
                         if presentCongratsView{
-                            LottieAnimationType(filename: "TaskCompletedGIF")
+                            LottieAnimationTypeCongrats(filename: "TaskCompletedGIF")
+                        }
+                        if presentForgoneView{
+                            LottieAnimationTypeForgone()
                         }
                         LazyVGrid(columns: columns, spacing: 20){
                             //Checking what task type
                             if taskType.lowercased() == "urgent"{
                                 ForEach(viewModelGlobal.individualTasksUrgent, id: \.self){
-                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "work"{
                                 ForEach(viewModelGlobal.individualTasksWork, id: \.self){
-                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "groceries"{
                                 ForEach(viewModelGlobal.individualTasksGroceries, id: \.self){
-                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "miscellaneous"{
                                 ForEach(viewModelGlobal.individualTasksMiscellaneous, id: \.self){
-                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, task: Task, taskType: taskType)
                                 }
                             }
                         }
@@ -194,7 +198,7 @@ struct TaskCellView: View {
     
     //MARK:- Show Lottie Animation
     @Binding var presentCongratsView: Bool
-    
+    @Binding var presentForgoneView: Bool
 
     let task: individualTask
     let taskType: String
@@ -248,6 +252,10 @@ struct TaskCellView: View {
                     Alert(title: Text("Would You Like To Forgo This Task?"), message: Text("'\(task.title)' Is The Highlighted Task"), primaryButton: .default(Text("Yes"), action: {
                         viewModelGlobal.removeItemFromTaskArray(item: task, taskType: taskType)
                         viewModelGlobal.removeItemFromTaskTitleArray(item: task.title, taskType: taskType)
+                        presentForgoneView = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                            self.presentForgoneView = false
+                        }
                     }), secondaryButton: .cancel(Text("No")))
                 })
                 Spacer()

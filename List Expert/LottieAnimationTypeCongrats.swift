@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LottieAnimationType: View {
+struct LottieAnimationTypeCongrats: View {
     let filename: String
     var body: some View {
         VStack{
@@ -19,7 +19,7 @@ struct LottieAnimationType: View {
 
 struct CongratsView_Previews: PreviewProvider {
     static var previews: some View {
-        LottieAnimationType(filename: "TaskCompletedGIF")
+        LottieAnimationTypeCongrats(filename: "TaskCompletedGIF")
             .previewDevice("iPhone 12 Pro Max")
     }
 }

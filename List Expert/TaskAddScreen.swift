@@ -26,7 +26,7 @@ struct TaskAddScreen: View {
     @State var tappedTaskBody: Bool = false
     @State var errorMessage: String = ""
     @State var showError: Bool = false
-    @State var taskBody: String = "Task Body"
+    @State var taskBody: String = ""
     @State var colorScheme: String = "Red"
     @State var color1: String = "TaskRed1"
     @State var color2: String = "TaskRed2"
@@ -46,15 +46,11 @@ struct TaskAddScreen: View {
                 Section(header: Text("New Task Information")) {
                     if tappedTaskBody == false{
                         TextField("Task Body", text: $taskBody )
-                        .foregroundColor(.gray)
-                            .onTapGesture {
-                                self.taskBody = ""
-                                self.tappedTaskBody = true
-                            }
-
+                            .foregroundColor(.gray)
+                        
                     }else{
                         TextField("Task Body", text: $taskBody )
-                        .foregroundColor(.black)
+                            .foregroundColor(.black)
                     }
                     Text("Choose Task Color Scheme")
                     Picker("Choose Color", selection: $colorScheme, content: {
@@ -161,7 +157,7 @@ struct TaskAddScreen: View {
     }
     //MARK:- Checking for Errors
     func checkTaskBody() -> Bool{
-        if taskBody.trimmingCharacters(in: .whitespacesAndNewlines) == "" || taskBody == "Task Body"{
+        if taskBody.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             self.errorMessage = "Error: Please Fill Task Body"
             return true
         } else{

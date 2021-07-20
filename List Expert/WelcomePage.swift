@@ -25,7 +25,7 @@ struct ContentView: View {
                         Text("Hello, "+username+"!")
                             .font(.system(size: 64, weight: .bold, design: .default))
                             .minimumScaleFactor(0.25)
-                            .lineLimit(1)
+                            .lineLimit(3)
                             .multilineTextAlignment(.center)
                             .allowsTightening(true)
                             .padding()

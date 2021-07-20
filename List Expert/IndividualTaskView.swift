@@ -38,6 +38,7 @@ struct IndividualTaskView: View {
     @State var presentCongratsView = false
     @State var presentForgoneView = false
     
+    @State var animatePlaceholder = false
     var body: some View {
         //MARK:- Header 
         ZStack {
@@ -63,32 +64,42 @@ struct IndividualTaskView: View {
                         if presentForgoneView{
                             LottieAnimationTypeForgone()
                         }
+                        if placeHolderText(taskType: taskType){
+                            Text("Your Tasks Will Appear Here")
+                                .font(.title).bold()
+                                .foregroundColor(Color(#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)))
+                                .padding()
+                                .minimumScaleFactor(0.25)
+                                .lineLimit(1)
+                                .allowsTightening(true)
+                                .animation(Animation.spring().delay(0))
+                        }
                         LazyVGrid(columns: columns, spacing: 20){
                             //Checking what task type
                             if taskType.lowercased() == "urgent"{
                                 ForEach(viewModelGlobal.individualTasksUrgent, id: \.self){
-                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, animatePlaceholder: $animatePlaceholder, task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "work"{
                                 ForEach(viewModelGlobal.individualTasksWork, id: \.self){
-                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, animatePlaceholder: $animatePlaceholder, task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "groceries"{
                                 ForEach(viewModelGlobal.individualTasksGroceries, id: \.self){
-                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, animatePlaceholder: $animatePlaceholder, task: Task, taskType: taskType)
                                 }
                             }
                             if taskType.lowercased() == "miscellaneous"{
                                 ForEach(viewModelGlobal.individualTasksMiscellaneous, id: \.self){
-                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, task: Task, taskType: taskType)
+                                    Task in TaskCellView(presentCongratsView: $presentCongratsView, presentForgoneView: $presentForgoneView, animatePlaceholder: $animatePlaceholder, task: Task, taskType: taskType)
                                 }
                             }
                         }
                         .padding()
                         .ignoresSafeArea(.container, edges: .bottom)
-                        .animation(Animation.spring().delay(0))
+                        .animation(Animation.spring())
                     }
                     .ignoresSafeArea(.container, edges: .bottom)
                     //.offset(x: 0, y: 40)
@@ -130,6 +141,26 @@ struct IndividualTaskView: View {
         .onAppear{
             
         }
+    }
+    //MARK:- Figure Out PlaceHolder Text
+    func placeHolderText(taskType: String) -> Bool{
+        if taskType.lowercased() == "urgent" && viewModelGlobal.individualTasksUrgent.count == 0{
+            
+            return true
+        }
+        else if taskType.lowercased() == "work" && viewModelGlobal.individualTasksWork.count == 0{
+            
+            return true
+        }
+        else if taskType.lowercased() == "groceries" && viewModelGlobal.individualTasksGroceries.count == 0{
+            
+            return true
+        }
+        else if taskType.lowercased() == "miscellaneous" && viewModelGlobal.individualTasksMiscellaneous.count == 0{
+           
+            return true
+        }
+        return false
     }
     //MARK:- Clear User Defaults
     func resetDefaults() {
@@ -199,7 +230,9 @@ struct TaskCellView: View {
     //MARK:- Show Lottie Animation
     @Binding var presentCongratsView: Bool
     @Binding var presentForgoneView: Bool
-
+    
+    @Binding var animatePlaceholder: Bool
+    
     let task: individualTask
     let taskType: String
     var body: some View {
@@ -267,6 +300,7 @@ struct TaskCellView: View {
         .cornerRadius(50)
         .shadow(color: .black, radius: 2.5)
     }
+
 }
 
 /*

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		800EB66726A07BFE0082309C /* GlobalEnvObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800EB66626A07BFE0082309C /* GlobalEnvObject.swift */; };
 		8018C0062694A00D007FBF7F /* TaskAddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018C0052694A00D007FBF7F /* TaskAddScreen.swift */; };
-		8062153B262C449200F68138 /* List_ExpertApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062153A262C449200F68138 /* List_ExpertApp.swift */; };
+		8062153B262C449200F68138 /* Task_ExpertApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062153A262C449200F68138 /* Task_ExpertApp.swift */; };
 		8062153D262C449200F68138 /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062153C262C449200F68138 /* WelcomePage.swift */; };
 		8062153F262C449300F68138 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8062153E262C449300F68138 /* Assets.xcassets */; };
 		80621542262C449300F68138 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80621541262C449300F68138 /* Preview Assets.xcassets */; };
@@ -26,8 +26,8 @@
 /* Begin PBXFileReference section */
 		800EB66626A07BFE0082309C /* GlobalEnvObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalEnvObject.swift; sourceTree = "<group>"; };
 		8018C0052694A00D007FBF7F /* TaskAddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddScreen.swift; sourceTree = "<group>"; };
-		80621537262C449200F68138 /* List Expert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "List Expert.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8062153A262C449200F68138 /* List_ExpertApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List_ExpertApp.swift; sourceTree = "<group>"; };
+		80621537262C449200F68138 /* Task Expert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Task Expert.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8062153A262C449200F68138 /* Task_ExpertApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task_ExpertApp.swift; sourceTree = "<group>"; };
 		8062153C262C449200F68138 /* WelcomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePage.swift; sourceTree = "<group>"; };
 		8062153E262C449300F68138 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80621541262C449300F68138 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 		8062152E262C449100F68138 = {
 			isa = PBXGroup;
 			children = (
-				80621539262C449200F68138 /* List Expert */,
+				80621539262C449200F68138 /* Task Expert */,
 				80621538262C449200F68138 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,15 +65,15 @@
 		80621538262C449200F68138 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				80621537262C449200F68138 /* List Expert.app */,
+				80621537262C449200F68138 /* Task Expert.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		80621539262C449200F68138 /* List Expert */ = {
+		80621539262C449200F68138 /* Task Expert */ = {
 			isa = PBXGroup;
 			children = (
-				8062153A262C449200F68138 /* List_ExpertApp.swift */,
+				8062153A262C449200F68138 /* Task_ExpertApp.swift */,
 				8062153C262C449200F68138 /* WelcomePage.swift */,
 				8094AE0A262C6B68000DA689 /* ToDoPage.swift */,
 				807E8B17268A0C7D003DC009 /* IndividualTaskView.swift */,
@@ -88,7 +88,7 @@
 				80621540262C449300F68138 /* Preview Content */,
 				808D524C26A59E6A00B25EC1 /* LottieFiles */,
 			);
-			path = "List Expert";
+			path = "Task Expert";
 			sourceTree = "<group>";
 		};
 		80621540262C449300F68138 /* Preview Content */ = {
@@ -111,9 +111,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		80621536262C449200F68138 /* List Expert */ = {
+		80621536262C449200F68138 /* Task Expert */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 80621546262C449300F68138 /* Build configuration list for PBXNativeTarget "List Expert" */;
+			buildConfigurationList = 80621546262C449300F68138 /* Build configuration list for PBXNativeTarget "Task Expert" */;
 			buildPhases = (
 				80621533262C449200F68138 /* Sources */,
 				80621534262C449200F68138 /* Frameworks */,
@@ -123,12 +123,12 @@
 			);
 			dependencies = (
 			);
-			name = "List Expert";
+			name = "Task Expert";
 			packageProductDependencies = (
 				808D525026A59EE100B25EC1 /* Lottie */,
 			);
 			productName = "List Expert";
-			productReference = 80621537262C449200F68138 /* List Expert.app */;
+			productReference = 80621537262C449200F68138 /* Task Expert.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -145,7 +145,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 80621532262C449100F68138 /* Build configuration list for PBXProject "List Expert" */;
+			buildConfigurationList = 80621532262C449100F68138 /* Build configuration list for PBXProject "Task Expert" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -161,7 +161,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				80621536262C449200F68138 /* List Expert */,
+				80621536262C449200F68138 /* Task Expert */,
 			);
 		};
 /* End PBXProject section */
@@ -192,7 +192,7 @@
 				800EB66726A07BFE0082309C /* GlobalEnvObject.swift in Sources */,
 				80CE478926A5CE2A0019761C /* LottieAnimationTypeForgone.swift in Sources */,
 				808D525326A59F4700B25EC1 /* LottieView.swift in Sources */,
-				8062153B262C449200F68138 /* List_ExpertApp.swift in Sources */,
+				8062153B262C449200F68138 /* Task_ExpertApp.swift in Sources */,
 				807E8B18268A0C7D003DC009 /* IndividualTaskView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,10 +324,10 @@
 				CODE_SIGN_ENTITLEMENTS = "List Expert/List Expert.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_ASSET_PATHS = "\"List Expert/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Task Expert/Preview Content\"";
 				DEVELOPMENT_TEAM = WGG5L2MMES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "List Expert/Info.plist";
+				INFOPLIST_FILE = "Task Expert/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -349,10 +349,10 @@
 				CODE_SIGN_ENTITLEMENTS = "List Expert/List Expert.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_ASSET_PATHS = "\"List Expert/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Task Expert/Preview Content\"";
 				DEVELOPMENT_TEAM = WGG5L2MMES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "List Expert/Info.plist";
+				INFOPLIST_FILE = "Task Expert/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -369,7 +369,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		80621532262C449100F68138 /* Build configuration list for PBXProject "List Expert" */ = {
+		80621532262C449100F68138 /* Build configuration list for PBXProject "Task Expert" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				80621544262C449300F68138 /* Debug */,
@@ -378,7 +378,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		80621546262C449300F68138 /* Build configuration list for PBXNativeTarget "List Expert" */ = {
+		80621546262C449300F68138 /* Build configuration list for PBXNativeTarget "Task Expert" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				80621547262C449300F68138 /* Debug */,

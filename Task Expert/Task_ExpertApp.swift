@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct List_ExpertApp: App {
+struct Task_ExpertApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView().environmentObject(GlobalEnvironment())

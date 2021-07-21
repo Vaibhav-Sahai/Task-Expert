@@ -33,7 +33,7 @@
 		80621541262C449300F68138 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		80621543262C449300F68138 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		807E8B17268A0C7D003DC009 /* IndividualTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualTaskView.swift; sourceTree = "<group>"; };
-		808D524B26A596B300B25EC1 /* List Expert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "List Expert.entitlements"; sourceTree = "<group>"; };
+		808D524B26A596B300B25EC1 /* Task Expert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Task Expert.entitlements"; sourceTree = "<group>"; };
 		808D524D26A59E8200B25EC1 /* TaskCompletedGIF.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TaskCompletedGIF.json; sourceTree = "<group>"; };
 		808D525226A59F4700B25EC1 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		808D525626A5A21900B25EC1 /* LottieAnimationTypeCongrats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationTypeCongrats.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 				808D525626A5A21900B25EC1 /* LottieAnimationTypeCongrats.swift */,
 				80CE478826A5CE2A0019761C /* LottieAnimationTypeForgone.swift */,
 				808D525226A59F4700B25EC1 /* LottieView.swift */,
-				808D524B26A596B300B25EC1 /* List Expert.entitlements */,
+				808D524B26A596B300B25EC1 /* Task Expert.entitlements */,
 				8062153E262C449300F68138 /* Assets.xcassets */,
 				80621543262C449300F68138 /* Info.plist */,
 				80621540262C449300F68138 /* Preview Content */,
@@ -321,11 +321,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "List Expert/List Expert.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Task Expert/Task Expert.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"Task Expert/Preview Content\"";
-				DEVELOPMENT_TEAM = WGG5L2MMES;
+				DEVELOPMENT_TEAM = T3786CCD4L;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Task Expert/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -333,7 +334,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vaibhav.List-Expert";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vaibhav.Task-Expert2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
@@ -346,11 +347,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "List Expert/List Expert.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Task Expert/Task Expert.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"Task Expert/Preview Content\"";
-				DEVELOPMENT_TEAM = WGG5L2MMES;
+				DEVELOPMENT_TEAM = T3786CCD4L;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Task Expert/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -358,7 +360,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vaibhav.List-Expert";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vaibhav.Task-Expert2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;

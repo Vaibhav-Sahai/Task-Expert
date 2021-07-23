@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		800EB66726A07BFE0082309C /* GlobalEnvObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800EB66626A07BFE0082309C /* GlobalEnvObject.swift */; };
+		80182BE526AB1F4D00DF4A29 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80182BE426AB1F4D00DF4A29 /* Launch Screen.storyboard */; };
 		8018C0062694A00D007FBF7F /* TaskAddScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018C0052694A00D007FBF7F /* TaskAddScreen.swift */; };
 		8062153B262C449200F68138 /* Task_ExpertApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062153A262C449200F68138 /* Task_ExpertApp.swift */; };
 		8062153D262C449200F68138 /* WelcomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062153C262C449200F68138 /* WelcomePage.swift */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		800EB66626A07BFE0082309C /* GlobalEnvObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalEnvObject.swift; sourceTree = "<group>"; };
+		80182BE426AB1F4D00DF4A29 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8018C0052694A00D007FBF7F /* TaskAddScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddScreen.swift; sourceTree = "<group>"; };
 		80621537262C449200F68138 /* Task Expert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Task Expert.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8062153A262C449200F68138 /* Task_ExpertApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task_ExpertApp.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				8062153A262C449200F68138 /* Task_ExpertApp.swift */,
+				80182BE426AB1F4D00DF4A29 /* Launch Screen.storyboard */,
 				8062153C262C449200F68138 /* WelcomePage.swift */,
 				8094AE0A262C6B68000DA689 /* ToDoPage.swift */,
 				807E8B17268A0C7D003DC009 /* IndividualTaskView.swift */,
@@ -174,6 +177,7 @@
 				80621542262C449300F68138 /* Preview Assets.xcassets in Resources */,
 				8062153F262C449300F68138 /* Assets.xcassets in Resources */,
 				808D524E26A59E8200B25EC1 /* TaskCompletedGIF.json in Resources */,
+				80182BE526AB1F4D00DF4A29 /* Launch Screen.storyboard in Resources */,
 				80CE478726A5CCF50019761C /* TaskForgone.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

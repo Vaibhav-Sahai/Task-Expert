@@ -137,6 +137,7 @@ struct IndividualTaskView: View {
             //.offset(x:0,y:20)
         }
         //Offset Navigation Bar Size
+        
         .offset(x:0 , y: -60)
         .onAppear{
             

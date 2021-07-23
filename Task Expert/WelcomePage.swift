@@ -45,6 +45,7 @@ struct ContentView: View {
                     Spacer()
                     //Buttons:
                     VStack(spacing: 10){
+                        
                         NavigationLink(
                             destination: ToDoPage()
                                 .animation(.spring()),
@@ -61,6 +62,7 @@ struct ContentView: View {
                                     }
                                     
                             })
+                        
                         Button{
                             alertView()
                         } label: {
@@ -88,6 +90,7 @@ struct ContentView: View {
         }
         .environmentObject(viewModelGlobal)
         //Color of Back Button
+        .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(.black)
     }
 

@@ -39,6 +39,10 @@ struct IndividualTaskView: View {
     @State var presentForgoneView = false
     
     @State var animatePlaceholder = false
+    
+    //MARK:- Env Var Dark Mode
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         //MARK:- Header 
         ZStack {
@@ -118,7 +122,7 @@ struct IndividualTaskView: View {
                         Image(systemName: "plus.circle.fill")
                             .resizable()
                             .renderingMode(.template)
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .light ? .black : .white)
                             //.background(Color(.black))
                             .frame(width: 40, height: 40)
                             .padding(.init(top: 0, leading: 0, bottom: 0, trailing: 60))

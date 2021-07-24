@@ -18,7 +18,7 @@ struct Task: Hashable{
 struct ToDoPage: View {
     @EnvironmentObject var viewModelGlobal: GlobalEnvironment
     var columns: [GridItem] =
-        Array(repeating: .init(.flexible(maximum: 160), spacing: 30, alignment: .center), count: 2)
+        Array(repeating: .init(.flexible(maximum: 100), spacing: 85, alignment: .center), count: 2)
 
     @State var dateAndTime = "" //Init Identifier
 
@@ -75,9 +75,8 @@ struct ToDoPage: View {
                             }
                             .animation(Animation.easeIn.delay(0.3))
                         }
-                        .padding()
                     }
-                    .padding()
+                    .padding(.top,30)
                 }
             }
 
@@ -127,7 +126,7 @@ struct TaskView: View {
                         .background(task.colorIcon)
                         .cornerRadius(100)
                     
-                    VStack(spacing: 10) {
+                    VStack(spacing: 5) {
                         Text(task.title)
                             .font(.title2)
                             .foregroundColor(.white)
@@ -140,7 +139,7 @@ struct TaskView: View {
                             .foregroundColor(.black)
                     }
                 }
-                .frame(width: 180, height: 180)
+                .frame(width: 170, height: 180)
                 .background(task.colorCell)
                 .cornerRadius(50)
                 .shadow(color: .black, radius: 2.5)
@@ -161,7 +160,7 @@ struct ToDoPage_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ToDoPage().environmentObject(GlobalEnvironment())
-                .previewDevice("iPhone 12 Pro Max")
+                .previewDevice("iPhone 12 mini")
         }
         
     }
